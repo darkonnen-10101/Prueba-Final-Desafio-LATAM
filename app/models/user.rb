@@ -7,8 +7,4 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :projects, dependent: :destroy
 
-  def my_projects
-    @my_projects = self.projects.all
-  end
-
 end

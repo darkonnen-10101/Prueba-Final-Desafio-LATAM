@@ -1,6 +1,21 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_category, :remove_category]
   before_action :authenticate_user!, except: [:index]
+
+  def add_category
+    @project.categories << Category.new(name: params[:name])
+    redirect_to root_path
+  end
+
+  def remove_category
+    category = Category.find(params[:category_id])
+    @project.categories.delete(category)
+    redirect_to root_path
+  end
+
+  # def get_categories
+  #   @categories = Category.find(params[:category_id])
+  # end
 
   def index
     @projects = Project.all
@@ -52,7 +67,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id)
+    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, categories_atributes: [:id, :category_id, :name])
   end
 
 end

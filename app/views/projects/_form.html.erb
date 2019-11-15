@@ -1,4 +1,4 @@
-<%= form_with(model: project, local: true, html: { class: 'form-horizontal' }) do |f| %>
+<%= form_with(model: [project], local: true, html: { class: 'form-horizontal' }) do |f| %>
   <% if project.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -14,6 +14,12 @@
       <%= f.label :name, 'Name', class: 'col-lg-2 control-label' %>
       <div class="col-lg-4">
         <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Título del post' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :category_id, 'Name', class: 'col-lg-2 control-label' %>
+      <div class="col-lg-4">
+        <%= f.select :category_id, Category.pluck(:name, :id), class: 'form-control', placeholder: 'Título del post' %>
       </div>
     </div>
     <div class="form-group">

@@ -4,7 +4,14 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+
+  resources :categories
+
   resources :projects do
+    member do
+      post 'add_category'
+      delete 'remove_category/:category_id', to: 'projects#remove_category', as: 'remove_category'
+    end
     resources :comments, only: [:create, :destroy]
   end
 
