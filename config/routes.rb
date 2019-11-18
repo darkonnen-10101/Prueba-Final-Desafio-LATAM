@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   resources :projects do
     member do
       post 'add_category'
+      get 'prueba', to: 'projects#prueba', as: 'prueba'
       delete 'remove_category/:category_id', to: 'projects#remove_category', as: 'remove_category'
     end
     resources :comments, only: [:create, :destroy]
   end
+
 
   get 'display', to: 'projects#display'
 

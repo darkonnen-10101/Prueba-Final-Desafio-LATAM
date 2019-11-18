@@ -1,0 +1,23 @@
+<div id="product-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= @project.name %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <%= form_for @project, remote: true do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.label :author %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= @project.name %>
+      <%= image_tag @project.project_photo.url %>
+
+
+    </div>
+  </div>
+</div>

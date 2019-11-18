@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_category, :remove_category]
+  before_action :set_project, only: [:prueba, :show, :edit, :update, :destroy, :add_category, :remove_category]
   before_action :authenticate_user!, except: [:index]
+  skip_before_action :verify_authenticity_token
 
   def add_category
     @project.categories << Category.new(name: params[:name])
@@ -13,15 +14,20 @@ class ProjectsController < ApplicationController
     redirect_to root_path
   end
 
-  # def get_categories
-  #   @categories = Category.find(params[:category_id])
-  # end
-
   def index
     @projects = Project.all
   end
 
   def edit
+    # @category = Category.all
+    # ids = []
+    # Category.all.each do |cat|
+    #   unless @project.categories.include?(cat)
+    #     ids.push(cat.id)
+    #   end
+    # end
+    # @nonSelectedCategories = Category.where("id IN (?)", ids)
+
   end
 
   def display
@@ -31,6 +37,9 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+  end
+
+  def prueba
   end
 
   def show
@@ -67,7 +76,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, categories_atributes: [:id, :category_id, :name])
+    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, categories_attributes: [:id, :name])
   end
 
 end

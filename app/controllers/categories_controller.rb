@@ -41,8 +41,8 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /tags/1.json
   def update
     respond_to do |format|
-      if @category.update(tag_params)
-        format.html { redirect_to @category, notice: 'Tag was successfully updated.' }
+      if @category.update(category_params)
+        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -54,9 +54,9 @@ class CategoriesController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    @tag.destroy
+    @category.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.html { redirect_to categories_path, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,8 +68,8 @@ class CategoriesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def tag_params
-      params.require(:category).permit(:name)
+    def category_params
+      params.require(:category).permit(:name, :id)
     end
 
 

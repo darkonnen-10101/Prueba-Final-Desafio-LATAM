@@ -7,6 +7,7 @@
       <tr>
         <th>Link</th>
         <th>Name</th>
+        <th>Photo</th>
         <th>Lead</th>
         <th>Description</th>
         <th>Repository</th>
@@ -20,8 +21,9 @@
       <% @projects.reverse.each do |project| %>
 
         <tr>
-          <td><%= link_to "#{project.name}", project %></td>
+          <td><%= link_to "#{project.name}", project_path(project) %></td>
           <td><%= project.url %></td>
+          <td><%= image_tag project.project_photo.url, size: "32x32" %></td>
           <td><%= project.lead %></td>
           <td><%= project.description %></td>
           <td><%= project.repository %></td>
@@ -35,6 +37,13 @@
             <%= link_to 'Editar', edit_project_path(project), class: 'btn btn-sm btn-success' %>
           </td>
           <td>
+            <%= link_to "Show prueba", prueba_project_path(project), remote: true, class: "btn btn-primary" %>
+          </td>
+          <td>
+            <%= link_to 'Show', project_path(project), class: 'btn btn-sm btn-success' %>
+          </td>
+
+          <td>
             <%= link_to 'Eliminar', project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
           </td>
         </tr>
@@ -44,5 +53,4 @@
 
   <br>
 
-  <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
 </div>
