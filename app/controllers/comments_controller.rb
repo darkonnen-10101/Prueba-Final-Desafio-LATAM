@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:destroy]
+  # before_action :set_comment, only: [:destroy]
   # before_action :authenticate_user!, except: [:index]
+  # authorize_resource
+  load_and_authorize_resource
+
+
 
   def create
     @project = Project.find(params[:project_id])
@@ -12,6 +16,8 @@ class CommentsController < ApplicationController
 
 
   def destroy
+    # authorize :destroy, @comment
+
     @project = Project.find(params[:project_id])
 		@comment = Comment.find(params[:id])
 		@comment.destroy

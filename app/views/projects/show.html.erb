@@ -13,6 +13,8 @@
 </div>
 <div class="row">
 	<div class="col-md-4">
+		<% if user_signed_in? %>
+
 		<div class="well well-sm">
 			<legend>Comentar:</legend>
 			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
@@ -25,6 +27,8 @@
 			<% end %>
 
 		</div>
+		<% end %>
+
 	</div>
 	<div class="col-md-8">
 		<% if @comments != nil %>
@@ -33,14 +37,21 @@
 					<strong><%= comment.user.name %>:</strong>
 					<br>
 					<%= comment.content %>
+
+					<% if can? :destroy, comment %>
 					<div class="text-right">
 						<%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-xs btn-danger' %>
 					</div>
+					<% end %>
+
 				</div>
 			<% end %>
 		<% end %>
 	</div>
 </div>
 
-<%= link_to 'Editar', root_path %>
-<%= link_to 'Volver', root_path, class: 'btn btn-default' %>
+<% if can? :update, @project %>
+	<%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-success' %>
+<% end %>
+
+<%= link_to 'Volver', root_path, class: 'btn btn-info' %>

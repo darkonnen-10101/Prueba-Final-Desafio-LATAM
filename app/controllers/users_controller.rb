@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:profile]
+  # before_action :set_user, only: [:profile]
+
+  load_and_authorize_resource
 
   def all
     @users = User.all

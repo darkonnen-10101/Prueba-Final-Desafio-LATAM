@@ -1,7 +1,18 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:all, :show, :edit, :update, :destroy, :add_category, :remove_category]
-  before_action :authenticate_user!, except: [:index]
-  skip_before_action :verify_authenticity_token
+  # before_action :set_project, only: [:all, :display, :add_category, :remove_category]
+                                      # :show, :edit, :update, :destroy,
+  before_action :authenticate_user!, only: [:new, :display]
+
+
+  # skip_before_action :verify_authenticity_token
+  # load_and_authorize_resource
+  # authorize_resource :only => [:add_category, :remove_category, :edit, :display, :show, :edit, :update, :destroy]
+  #                             # , :all
+  # load_resource
+
+  load_and_authorize_resource
+
+  skip_authorize_resource :only => [:add_category, :remove_category] #, :all, :display
 
   def add_category
     @project.categories << Category.new(name: params[:name])
@@ -67,6 +78,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    # authorize :destroy, @project
     @project.destroy
     redirect_to projects_path
   end

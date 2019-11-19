@@ -12,6 +12,8 @@ gem 'popper_js', '~> 1.14.5'
 
 gem 'jquery-rails'
 
+gem 'cancancan'
+
 gem 'bootstrap'
 
 gem 'carrierwave'

@@ -30,10 +30,19 @@
             <td><%= project.description %></td>
             <td><%= project.repository %></td>
             <td><%= project.user.name %></td>
-            <td><%= link_to 'Editar', edit_project_path(project), class: 'btn btn-sm btn-success' %></td>
+
             <td>
-              <%= link_to 'Eliminar', project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
-            </td>
+              <% if can? :destroy, project %>
+                <%= link_to 'Editar', edit_project_path(project), class: 'btn btn-sm btn-success' %>
+              <% end %>
+              </td>
+
+              <td>
+                <% if can? :destroy, project %>
+                  <%= link_to 'Eliminar', project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
+                <% end %>
+              </td>
+
           </tr>
         <% end %>
       </tbody>
