@@ -19,6 +19,8 @@ gem 'bootstrap'
 gem 'carrierwave'
 
 gem 'devise'
+
+gem 'rolify'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
