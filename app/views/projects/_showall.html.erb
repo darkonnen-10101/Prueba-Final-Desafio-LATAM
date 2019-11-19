@@ -1,0 +1,40 @@
+
+<div id="product-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= @project.name %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <%= form_for @project, remote: true do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.label :author %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= @project.name %>
+      <%= image_tag @project.project_photo.url, size: "200x200" %>
+      <%= @project.url %>
+      <%= @project.lead %>
+      <%= @project.description %>
+      <%= @project.repository %>
+      <%= @project.user.name %>
+
+      <% @project.categories.each do |category| %>
+        <%= category.name %>
+      <% end %>
+
+      <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-sm btn-success' %>
+      <%= link_to 'Show', project_path(@project), class: 'btn btn-sm btn-info' %>
+      <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
+
+
+
+
+
+    </div>
+  </div>
+</div>

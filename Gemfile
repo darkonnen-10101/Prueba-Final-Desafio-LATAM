@@ -10,6 +10,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'popper_js', '~> 1.14.5'
 
+gem 'jquery-rails'
+
 gem 'bootstrap'
 
 gem 'carrierwave'

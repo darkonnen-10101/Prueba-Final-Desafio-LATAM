@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:prueba, :show, :edit, :update, :destroy, :add_category, :remove_category]
+  before_action :set_project, only: [:all, :show, :edit, :update, :destroy, :add_category, :remove_category]
   before_action :authenticate_user!, except: [:index]
   skip_before_action :verify_authenticity_token
 
@@ -39,7 +39,8 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  def prueba
+  def all
+    @projects = Project.all
   end
 
   def show
