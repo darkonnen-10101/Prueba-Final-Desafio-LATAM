@@ -22,10 +22,43 @@
       <%= @project.description %>
       <%= @project.repository %>
       <%= @project.user.name %>
+      <%= @project.comments.count %>
 
       <% @project.categories.each do |category| %>
         <%= category.name %>
       <% end %>
+
+      <div class="row">
+      	<div class="col-md-4">
+      		<div class="well well-sm">
+      			<legend>Comentar:</legend>
+      			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
+      				<div class="form-group">
+      					<div class="col-md-12">
+      						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
+      					</div>
+      				</div>
+      				<%= f.submit 'Comentar', class: 'btn btn-primary' %>
+      			<% end %>
+
+      		</div>
+      	</div>
+      	<div class="col-md-8">
+      		<% if @project.comments != nil %>
+      			<% @project.comments.each do |comment| %>
+      				<div class="well well-sm">
+      					<strong><%= comment.user.name %>:</strong>
+      					<br>
+      					<%= comment.content %>
+      					<div class="text-right">
+      						<%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-xs btn-danger' %>
+      					</div>
+      				</div>
+      			<% end %>
+      		<% end %>
+      	</div>
+      </div>
+
 
       <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-sm btn-success' %>
       <%= link_to 'Show', project_path(@project), class: 'btn btn-sm btn-info' %>
