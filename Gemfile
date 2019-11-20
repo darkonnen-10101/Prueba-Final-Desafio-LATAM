@@ -10,11 +10,13 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'popper_js', '~> 1.14.5'
 
+gem 'font-awesome-sass'
+
 gem 'jquery-rails'
 
 gem 'cancancan'
 
-gem 'activeadmin'
+gem 'rails_admin', '~> 2.0', git: 'https://github.com/sferik/rails_admin.git'
 
 gem 'bootstrap'
 

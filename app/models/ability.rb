@@ -9,9 +9,7 @@ class Ability
       user ||= User.new # guest user (not logged in)
       if user.has_role? :admin
         can :manage, :all
-        can :manage, ActiveAdmin::Page, name: 'Login'
       else
-        can :manage, ActiveAdmin::Page, name: 'Login'
 
         # can :read, :all
         # can :create, Project
