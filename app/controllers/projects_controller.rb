@@ -1,29 +1,23 @@
 class ProjectsController < ApplicationController
   # before_action :set_project, only: [:all, :display, :add_category, :remove_category]
                                       # :show, :edit, :update, :destroy,
-  before_action :authenticate_user!, only: [:new, :display]
-
-
   # skip_before_action :verify_authenticity_token
   # load_and_authorize_resource
   # authorize_resource :only => [:add_category, :remove_category, :edit, :display, :show, :edit, :update, :destroy]
   #                             # , :all
   # load_resource
 
+  before_action :authenticate_user!, only: [:new, :display]
   load_and_authorize_resource
 
   skip_authorize_resource :only => [:add_category, :remove_category] #, :all, :display
+  skip_before_action :verify_authenticity_token, :only => [:create, :update]
 
-  def add_category
-    @project.categories << Category.new(name: params[:name])
-    redirect_to root_path
-  end
-
-  def remove_category
-    category = Category.find(params[:category_id])
-    @project.categories.delete(category)
-    redirect_to root_path
-  end
+  # def add_category
+  # end
+  #
+  # def remove_category
+  # end
 
   def index
     @projects = Project.all
@@ -51,7 +45,7 @@ class ProjectsController < ApplicationController
   end
 
   def all
-    @projects = Project.all
+    # @projects = Project.all
   end
 
   def show
@@ -59,10 +53,13 @@ class ProjectsController < ApplicationController
   end
 
   def create
+
     @project = Project.new(project_params)
     @project.user = current_user
 
     if @project.save
+      @project.categories << Category.find_by(id: params[:category_id])
+
       render :show, status: :created, location: @project
     else
       render :new
@@ -70,7 +67,11 @@ class ProjectsController < ApplicationController
   end
 
   def update
+
     if @project.update(project_params)
+       @project.categories << Category.find_by(id: params[:category_id])
+
+
       render :show, status: :created, location: @project
     else
       render :edit
@@ -89,7 +90,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, categories_attributes: [:id, :name])
+    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, :categories_attributes => [:id, :name])
   end
 
 end

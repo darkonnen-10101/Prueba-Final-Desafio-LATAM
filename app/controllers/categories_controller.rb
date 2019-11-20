@@ -1,8 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_user!
-  skip_authorization_check :only => [:index]
-
+  skip_authorization_check
   # GET /tags
   # GET /tags.json
   def index

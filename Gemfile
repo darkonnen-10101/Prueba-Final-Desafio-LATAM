@@ -14,6 +14,8 @@ gem 'jquery-rails'
 
 gem 'cancancan'
 
+gem 'activeadmin'
+
 gem 'bootstrap'
 
 gem 'carrierwave'

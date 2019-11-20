@@ -17,18 +17,16 @@
       </div>
     </div>
 
-
+    <%= form_tag :categories do %>
 
     <div class="form-group">
-      <%= f.fields_for :categories, @project.categories.build do |f| %>
-         <%= f.label :name, 'Name', class: 'col-lg-2 control-label' %>
+         <%=f.label :category_id, 'Category', class: 'col-lg-2 control-label' %>
         <div class="col-lg-4">
-          <%= f.select :name, Category.pluck(:name) , class: 'form-control', placeholder: 'category_id' %>
+          <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
         </div>
-       <% end %>
     </div>
 
-
+     <% end %>
 
     <div class="form-group">
       <%= f.label :url, 'Url', class: 'col-lg-2 control-label' %>

@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+
   rolify
+  
   after_initialize :set_default_role, if: :new_record?
   validates :roles, presence: true
 

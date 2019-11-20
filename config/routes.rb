@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -9,10 +11,12 @@ Rails.application.routes.draw do
 
   resources :projects do
     member do
-      post 'add_category'
+      # post 'add_category'
       get 'all', to: 'projects#all', as: 'all'
-      delete 'remove_category/:category_id', to: 'projects#remove_category', as: 'remove_category'
+      # delete 'remove_category/:category_id', to: 'projects#remove_category', as: 'remove_category'
     end
+    resources :categories
+
     resources :comments, only: [:create, :destroy]
   end
 
