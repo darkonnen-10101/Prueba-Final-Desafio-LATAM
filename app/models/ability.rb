@@ -9,15 +9,16 @@ class Ability
       user ||= User.new # guest user (not logged in)
       if user.has_role? :admin
         can :manage, :all
-        can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
+        can :manage, ActiveAdmin::Page, name: 'Login'
       else
+        can :manage, ActiveAdmin::Page, name: 'Login'
+
         # can :read, :all
         # can :create, Project
         # can :read, Comment
         # can :create, Comment
         # can :read, Category, :all, public: true
         # can :edit, Project, :all
-
         can :all, User
         can :profile, User
 
