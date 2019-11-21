@@ -18,6 +18,10 @@ gem 'cancancan'
 
 gem 'rails_admin', '~> 2.0', git: 'https://github.com/sferik/rails_admin.git'
 
+gem 'rails_admin_charts'
+
+gem 'coffee-rails'
+
 gem 'bootstrap'
 
 gem 'carrierwave'
@@ -25,6 +29,8 @@ gem 'carrierwave'
 gem 'devise'
 
 gem 'rolify'
+
+gem "chartkick"
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
