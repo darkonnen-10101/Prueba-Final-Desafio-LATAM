@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'
+    # omniauth_callbacks: 'users/omniauth_callbacks'
+    # registrations: 'users/registrations',
+    # sessions: 'users/sessions'
+
   }
+
+  devise_scope :user do
+    get 'login', to: 'devise/users/sessions#new'
+  end
+
+  devise_scope :user do
+    get 'signup', to: 'devise/users/registrations#new'
+  end
+
 
   resources :categories
 
@@ -15,13 +26,13 @@ Rails.application.routes.draw do
       # delete 'remove_category/:category_id', to: 'projects#remove_category', as: 'remove_category'
     end
     resources :categories
-
     resources :comments, only: [:create, :destroy]
   end
 
   get 'users', to: 'users#all'
   get 'profile/:id', to: 'users#profile', as: 'profile'
   get 'display', to: 'projects#display'
+  get 'about', to: 'about#index'
 
   root to: 'projects#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
