@@ -6,9 +6,9 @@
 require("jquery")
 require("@rails/ujs").start()
 require("turbolinks").start()
+require("bootstrap-sprockets")
 require("@rails/activestorage").start()
 require("channels")
-require("chartkick")
 require("chart.js")
 
 

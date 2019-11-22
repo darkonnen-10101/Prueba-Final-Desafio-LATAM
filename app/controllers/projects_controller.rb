@@ -56,9 +56,9 @@ class ProjectsController < ApplicationController
 
     @project = Project.new(project_params)
     @project.user = current_user
+    @project.categories << Category.find_by(id: params[:category_id])
 
     if @project.save
-      @project.categories << Category.find_by(id: params[:category_id])
 
       render :show, status: :created, location: @project
     else
@@ -68,10 +68,10 @@ class ProjectsController < ApplicationController
 
   def update
 
+    @project.categories << Category.find_by(id: params[:category_id]) unless @project.categories.where(id: params[:category_id]).exists?
+
     if @project.update(project_params)
-       @project.categories << Category.find_by(id: params[:category_id])
-
-
+       # @project.categories << Category.find_by(id: params[:category_id])
       render :show, status: :created, location: @project
     else
       render :edit
