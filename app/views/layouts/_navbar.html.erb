@@ -23,6 +23,9 @@
         <li class="nav-item">
           <%= link_to "Categories", categories_path, class: "nav-link"%>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://empieza.desafiolatam.com">E-learning</a>
+        </li>
         <% if user_signed_in? && current_user.has_role?(:admin) %>
 
           <li class="nav-item">
@@ -36,16 +39,18 @@
         <ul class="navbar-nav mr-5">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#my-target">
-              <% if current_user.profile_photo != "" %>
-                <%=image_tag current_user.profile_photo, class: "rounded-circle", size: "40x40" %>
+              <% if current_user.provider == "github" %>
+                <%= image_tag current_user.profile_photo, class: "rounded-circle", size: "40x40" %>
               <% else %>
-                <%=image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTN-KnBJBlAXK1x97js3MvFxahRv49ljFFqPwn7_16-0l1T2kEt", class: "rounded-circle", size: "40x40" %>
+                <%=image_tag current_user.avatar.url, class: "rounded-circle", size: "40x40" %>
               <% end %>
             </a>
             <div id="my-target" class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "My profile", display_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "New project", new_project_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Config", edit_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", method: :delete %>
             </div>

@@ -13,11 +13,31 @@ class ProjectsController < ApplicationController
   skip_authorize_resource :only => [:add_category, :remove_category] #, :all, :display
   skip_before_action :verify_authenticity_token, :only => [:create, :update]
 
-  # def add_category
-  # end
-  #
-  # def remove_category
-  # end
+  def add_tag
+    # @movie = Movie.find(params[:id])
+    @project.tags << Tag.new(name: params[:name])
+    # render json: @project.tags.as_json
+    respond_to do |format|
+      format.js
+      format.html { redirect_to request.referrer }
+      format.json { head :no_content }
+    end
+
+
+  end
+
+  def remove_tag
+
+    tag = Tag.find(params[:tag_id])
+    @project.tags.delete(tag)
+    respond_to do |format|
+      format.js
+      format.html { redirect_to request.referrer }
+      format.json {head :no_content}
+    end
+    # redirect_to root_path
+
+  end
 
   def index
     @projects = Project.all
@@ -56,7 +76,7 @@ class ProjectsController < ApplicationController
 
     @project = Project.new(project_params)
     @project.user = current_user
-    @project.categories << Category.find_by(id: params[:category_id])
+    # @project.categories << Category.find_by(id: params[:category_id])
 
     if @project.save
 
@@ -68,7 +88,7 @@ class ProjectsController < ApplicationController
 
   def update
 
-    @project.categories << Category.find_by(id: params[:category_id]) unless @project.categories.where(id: params[:category_id]).exists?
+    # @project.categories << Category.find_by(id: params[:category_id]) unless @project.categories.where(id: params[:category_id]).exists?
 
     if @project.update(project_params)
        # @project.categories << Category.find_by(id: params[:category_id])

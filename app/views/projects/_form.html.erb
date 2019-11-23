@@ -1,4 +1,4 @@
-<%= form_with(model: project, local: true, html: { class: 'form-horizontal' }) do |f| %>
+<%= form_with(model: project, local: true, id: "myForm", html: { class: 'form-horizontal' }) do |f| %>
   <% if project.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -19,14 +19,43 @@
 
     <%= form_tag :categories do %>
 
-    <div class="form-group">
-         <%=f.label :category_id, 'Category', class: 'col-lg-2 control-label' %>
-        <div class="col-lg-4">
-          <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
-        </div>
-    </div>
+      <div class="form-group">
+           <%=f.label :category_id, 'Category', class: 'col-lg-2 control-label' %>
+          <div class="col-lg-4">
+            <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
+          </div>
+      </div>
 
      <% end %>
+
+    <script type="text/javascript">
+      $("window").click(function)(){
+        e.preventDefault();
+        var form = $("myForm");
+        var new_tag = $("[name='name']").val();
+
+        $.ajax({
+          url: form.action,
+          type: 'POST',
+          dataType: 'json',
+          data: {tag: {name: new_tag } }
+        })
+        .done(function(data) {
+          $("#add_tag").append(data.content);
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+
+        })
+      });
+
+    </script>
+
+
 
     <div class="form-group">
       <%= f.label :url, 'Url', class: 'col-lg-2 control-label' %>

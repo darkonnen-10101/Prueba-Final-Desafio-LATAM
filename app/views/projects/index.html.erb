@@ -6,9 +6,9 @@
       <div class="col-md-4 col-lg-4">
         <div class="card shadow border-1">
           <% if user_signed_in? %>
-            <%= link_to (image_tag project.project_photo.url, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
+            <%= link_to (image_tag project.project_photo, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
           <% else %>
-          <%= link_to (image_tag project.project_photo.url, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
+          <%= link_to (image_tag project.project_photo, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
         <% end %>
         </div>
         <div class="w-100" style="margin-top:20px;">

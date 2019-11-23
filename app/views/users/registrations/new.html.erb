@@ -12,12 +12,12 @@
 
   <div class="field">
     <%= f.label :city %><br/>
-    <%= f.text_field :city, autocomplete: "city" %>
+    <%= f.select :city, raw("<option>Córdoba</option><option>Santiago</option><option>Valparaíso</option>"), class: 'form_input' %>
   </div>
 
   <div class="field">
     <%= f.label :course %><br/>
-    <%= f.text_field :course, autocomplete: "course" %>
+    <%= f.select :course, raw("<option>Desarrollo Full Stack</option><option>Desarrollo Front End</option><option>Data Science</option><option>Diseño UX/UI</option><option>Desarrollo Sitios Web</option><option>Marketing Digital</option><option>Desarrollo Videojuegos</option><option>Desarrollo Android</option>"), class: 'form_input' %>
   </div>
 
   <div class="field">
@@ -26,8 +26,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :profile_photo %><br/>
-    <%= f.text_field :profile_photo, autocomplete: "profile_photo" %>
+    <%= f.label :avatar %><br/>
+    <%= f.file_field :avatar, autocomplete: "avatar" %>
   </div>
 
   <div class="field">

@@ -1,31 +1,23 @@
 Rails.application.routes.draw do
 
+  get 'tags/create'
+  get 'tags/destroy'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
     # omniauth_callbacks: 'users/omniauth_callbacks'
     registrations: 'users/registrations',
     sessions: 'users/sessions'
-
   }
-
-  # devise_scope :user do
-  #   get 'users/login', to: 'users/sessions#new'
-  # end
-  #
-  # devise_scope :user do
-  #   get 'users/sign_up', to: 'users/registrations#new'
-  # end
-  #
 
   resources :categories
 
   resources :projects do
     member do
-      # post 'add_category'
+      post 'add_tag'
       get 'all', to: 'projects#all', as: 'all'
-      # delete 'remove_category/:category_id', to: 'projects#remove_category', as: 'remove_category'
+      delete 'remove_tag/:tag_id', to: 'projects#remove_tag', as: 'remove_tag'
     end
-    resources :categories
+    # resources :tags
     resources :comments, only: [:create, :destroy]
   end
 
