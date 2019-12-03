@@ -1,22 +1,55 @@
-<div class="container">
-
-<div class="row">
-
-
-<% @users.each do |user| %>
-<figure class="snip0061 yellow"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample8.jpg" alt="sample8" />
-  <figcaption>
-    <h2> <%= user.name %> </h2>
-    <p>  <%= user.email %> </p>
-    <div class="icons">
-    <a href="<%= profile_path(user) %>"><i class="ion-ios-home"></i></a>
-
-    <a href="<%= profile_path(user) %>"><i class="ion-ios-email"></i></a>
-    <a href="<%= profile_path(user) %>"><i class="ion-ios-telephone"></i></a>
+<section class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="justify-content-center">
+        <h2>Desafío LATAM</h2>
+        <h3>Connect with our professional & graduates</h3>
+      </div>
+    </div>
   </div>
-  </figcaption>
-  <div class="position">Software Engineer</div>
-</figure>
-<% end %>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container text-center">
+    <h2>Hire profesionals directly from our community</h2>
+    <p>Desafío LATAM is one of the best coding bootcamps in south america. Currently we have more than 2.500 students in 8 courses and still counting!  </p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="text-center my-3">
+    <h2>Recent graduates</h2>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <% @users.each do |user| %>
+      <figure class="snip0061 yellow"><img src="<%= user.avatar.present? ? user.avatar : user.profile_photo %>" alt=""/>
+        <figcaption>
+          <h2>
+            <%= user.name %>
+          </h2>
+          <p>
+            <%= user.email %>
+          </p>
+          <div class="icons">
+            <a href="<%= profile_path(user) %>">
+              <i class="fas fa-user"></i>
+            </a>
+
+            <a href="mailto:<%=user.email%>">
+              <i class="ion-ios-email"></i>
+            </a>
+          </div>
+        </figcaption>
+        <div class="position"><%= user.course %> |
+        <small><%= user.city %></small></div>
+
+      </figure>
+    <% end %>
+  </div>
 </div>
+
+<div class="container justify-content-center d-flex">
+  <%= paginate @users %>
 </div>

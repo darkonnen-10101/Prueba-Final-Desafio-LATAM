@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
 
+
   mount_uploader :avatar, ImageUploader
 
 
@@ -42,6 +43,8 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :projects, dependent: :destroy
+
+  paginates_per 10
 
 
 end

@@ -1,57 +1,68 @@
-<div class="text-center">
-	<p id="notice"><%= notice %></p>
+<div class="container">
 
-	<legend><h1><%= @project.name %></h1></legend>
+	<div class="text-center">
+		<p id="notice"><%= notice %></p>
 
-	<p><strong>Publicado por:</strong> <%= @project.user.name %></p>
+		<legend>
+			<h1><%= @project.name %></h1>
+		</legend>
 
-	<div class="jumbotron">
 		<p>
-	  <%= @project.lead %>
-	</p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-4">
-		<% if user_signed_in? %>
+			<strong>Publicado por:</strong>
+			<%= @project.user.name %></p>
 
-		<div class="well well-sm">
-			<legend>Comentar:</legend>
-			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
-				<div class="form-group">
-					<div class="col-md-12">
-						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
-					</div>
-				</div>
-				<%= f.submit 'Comentar', class: 'btn btn-primary' %>
-			<% end %>
-
+		<div class="jumbotron col">
+			<p>
+				<%= image_tag @project.project_photo.url, :width => '100%' %>
+			</p>
+			<h3><%= @project.lead %></h3>
+			<h4><%= @project.description %></h4>
 		</div>
+
+		<% if can? :update, @project %>
+			<%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-success' %>
 		<% end %>
 
-	</div>
-	<div class="col-md-8">
-		<% if @comments != nil %>
-			<% @comments.each do |comment| %>
-				<div class="well well-sm">
-					<strong><%= comment.user.name %>:</strong>
-					<br>
-					<%= comment.content %>
+		<%= link_to 'Volver', root_path, class: 'btn btn-info' %>
 
-					<% if can? :destroy, comment %>
+	</div>
+
+	<% if @comments != nil %>
+		<% @comments.each do |comment| %>
+			<div class="card card-body bg-light mt-5">
+				<strong><%= comment.user.name %>:</strong>
+				<br>
+				<p><%= comment.content %></p>
+
+				<% if can? :destroy, comment %>
 					<div class="text-right">
 						<%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-xs btn-danger' %>
 					</div>
-					<% end %>
+				<% end %>
 
-				</div>
-			<% end %>
+			</div>
 		<% end %>
-	</div>
+	<% end %>
+
+	<% if user_signed_in? %>
+		<div class="card card-body bg-light mt-5">
+			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
+				<div class="form-group">
+					<div class="col-md-12">
+						<legend>Comentar:</legend>
+						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
+						<%= f.submit 'Comentar', class: 'btn btn-primary' %>
+					</div>
+				</div>
+		  <% end %>
+  	</div>
+  <% end %>
+
+<div class="container mt-5 d-flex justify-content-center">
+	<% if @comments != nil%>
+  	<%= paginate @comments %>
+	<% end %>
+
 </div>
 
-<% if can? :update, @project %>
-	<%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-success' %>
-<% end %>
-
-<%= link_to 'Volver', root_path, class: 'btn btn-info' %>
+</div>

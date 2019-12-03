@@ -9,16 +9,18 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+
   resources :categories
 
   resources :projects do
+      get 'page/:page', action: :index, on: :collection
     member do
-      post 'add_tag'
+      # post 'add_tag'
       get 'all', to: 'projects#all', as: 'all'
-      delete 'remove_tag/:tag_id', to: 'projects#remove_tag', as: 'remove_tag'
+      # delete 'remove_tag/:tag_id', to: 'projects#remove_tag', as: 'remove_tag'
     end
     # resources :tags
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :update, :destroy]
   end
 
   get 'users', to: 'users#all'

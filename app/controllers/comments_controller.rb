@@ -14,7 +14,6 @@ class CommentsController < ApplicationController
 		redirect_to @project
   end
 
-
   def destroy
     # authorize :destroy, @comment
 

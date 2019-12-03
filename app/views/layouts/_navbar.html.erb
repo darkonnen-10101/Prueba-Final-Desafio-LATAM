@@ -23,15 +23,18 @@
         <li class="nav-item">
           <%= link_to "Categories", categories_path, class: "nav-link"%>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="http://empieza.desafiolatam.com">E-learning</a>
-        </li>
+        </li> -->
         <% if user_signed_in? && current_user.has_role?(:admin) %>
 
           <li class="nav-item">
             <%= link_to "Dashboard", rails_admin_path, class: "nav-link"%>
           </li>
         <% end %>
+        <form class="form-inline my-2 my-lg-0">
+          <a href="http://empieza.desafiolatam.com" class="btn btn-outline-success btn-sm ml-5 my-sm-0">E-learning</a>
+        </form>
 
 
       </ul>
@@ -39,18 +42,18 @@
         <ul class="navbar-nav mr-5">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#my-target">
-              <% if current_user.provider == "github" %>
+              <% if current_user.avatar.present? %>
+              <%=image_tag current_user.avatar.url, class: "rounded-circle", size: "40x40" %>
+              <% elsif current_user.provider.present? %>
                 <%= image_tag current_user.profile_photo, class: "rounded-circle", size: "40x40" %>
               <% else %>
-                <%=image_tag current_user.avatar.url, class: "rounded-circle", size: "40x40" %>
+                <%=image_tag "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png", class: "rounded-circle", size: "40x40" %>
               <% end %>
             </a>
             <div id="my-target" class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "My profile", display_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "New project", new_project_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Config", edit_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", method: :delete %>
             </div>

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def all
-    @users = User.all
+    @users = User.page(params[:page]).order(created_at: :desc).per(9)
   end
 
   def profile

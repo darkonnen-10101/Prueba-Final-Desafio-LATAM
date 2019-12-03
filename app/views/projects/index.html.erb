@@ -1,21 +1,26 @@
-<div class="container">
-  <h1>Projects</h1>
+<!-- <nav class="navbar navbar-expand-sm navbar-light bg-light" data-toggle="affix"> <div class="mx-auto d-sm-flex d-block flex-sm-nowrap"> <a class="navbar-brand" href="#">Brand</a> <button class="navbar-toggler" type="button" data-toggle="collapse"
+data-target="#navbarsExample11" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <div class="collapse navbar-collapse text-center" id="navbarsExample11"> <ul class="navbar-nav"> <li
+class="nav-item active"> <a class="nav-link" href="#">Link</a> </li> <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li> <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li> <li class="nav-item"> <a class="nav-link"
+href="#">Link</a> </li> <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li> </ul> </div> </div> </nav> -->
+
+<div class="container justify-content-center text-center my-5">
+  <h1 class="mb-5">Community Projects</h1>
 
   <div class="row">
-    <% @projects.reverse.each do |project| %>
+    <% @projects.each do |project| %>
       <div class="col-md-4 col-lg-4">
         <div class="card shadow border-1">
-          <% if user_signed_in? %>
-            <%= link_to (image_tag project.project_photo, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
-          <% else %>
-          <%= link_to (image_tag project.project_photo, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
-        <% end %>
+          <%= link_to (image_tag project.project_photo.url, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
         </div>
-        <div class="w-100" style="margin-top:20px;">
-        </div>
+        <div class="w-100" style="margin-top:20px;"></div>
 
       </div>
-      <% end %>
+    <% end %>
 
   </div>
+
+</div>
+
+<div class="container justify-content-center d-flex">
+  <%= paginate @projects %>
 </div>

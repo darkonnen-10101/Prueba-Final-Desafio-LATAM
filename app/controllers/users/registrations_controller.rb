@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, if: :devise_controller? #, only: [:update]
   skip_authorization_check
   # check_authorization :unless => :devise_controller?
   # before_action :configure_account_update_params, only: [:update]
@@ -31,6 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
@@ -44,13 +46,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :city, :bio, :profile_photo, :avatar, :course, roles: []])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :city, :bio, :profile_photo, :password, :password_confirmation, :avatar, :course, roles: []])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :city, :bio, :profile_photo, :password, :password_confirmation, :avatar, :course, roles: []])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
@@ -60,5 +62,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
+  # end
+
+  # def update_resource(resource, params)
+  #   resource.update_without_password(params)
   # end
 end

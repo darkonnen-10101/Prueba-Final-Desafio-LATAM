@@ -17,44 +17,15 @@
       </div>
     </div>
 
-    <%= form_tag :categories do %>
-
+  <%= form_tag :categories do   %>
       <div class="form-group">
-           <%=f.label :category_id, 'Category', class: 'col-lg-2 control-label' %>
+           <%= label :category_id, 'Category', class: 'col-lg-2 control-label' %>
           <div class="col-lg-4">
-            <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
+            <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name), class: 'chosen-select' %>
           </div>
       </div>
 
-     <% end %>
-
-    <script type="text/javascript">
-      $("window").click(function)(){
-        e.preventDefault();
-        var form = $("myForm");
-        var new_tag = $("[name='name']").val();
-
-        $.ajax({
-          url: form.action,
-          type: 'POST',
-          dataType: 'json',
-          data: {tag: {name: new_tag } }
-        })
-        .done(function(data) {
-          $("#add_tag").append(data.content);
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          console.log("complete");
-        });
-
-        })
-      });
-
-    </script>
-
+  <% end %>
 
 
     <div class="form-group">

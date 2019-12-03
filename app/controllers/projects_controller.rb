@@ -13,34 +13,36 @@ class ProjectsController < ApplicationController
   skip_authorize_resource :only => [:add_category, :remove_category] #, :all, :display
   skip_before_action :verify_authenticity_token, :only => [:create, :update]
 
-  def add_tag
-    # @movie = Movie.find(params[:id])
-    @project.tags << Tag.new(name: params[:name])
-    # render json: @project.tags.as_json
-    respond_to do |format|
-      format.js
-      format.html { redirect_to request.referrer }
-      format.json { head :no_content }
-    end
-
-
-  end
-
-  def remove_tag
-
-    tag = Tag.find(params[:tag_id])
-    @project.tags.delete(tag)
-    respond_to do |format|
-      format.js
-      format.html { redirect_to request.referrer }
-      format.json {head :no_content}
-    end
-    # redirect_to root_path
-
-  end
+  # def add_tag
+  #   @categories = Category.all
+  #   # @movie = Movie.find(params[:id])
+  #   @project.tags << Tag.new(name: params[:name])
+  #   # render json: @project.tags.as_json
+  #   respond_to do |format|
+  #     format.js
+  #     format.html { redirect_to request.referrer }
+  #     format.json { head :no_content }
+  #   end
+  #
+  #
+  # end
+  #
+  # def remove_tag
+  #
+  #   tag = Tag.find(params[:tag_id])
+  #   @project.tags.delete(tag)
+  #   respond_to do |format|
+  #     format.js
+  #     format.html { redirect_to request.referrer }
+  #     format.json {head :no_content}
+  #   end
+  #   # redirect_to root_path
+  #
+  # end
 
   def index
-    @projects = Project.all
+    # @projects = Project.all
+    @projects = Project.page(params[:page]).order(created_at: :desc).per(9)
   end
 
   def edit
@@ -58,21 +60,27 @@ class ProjectsController < ApplicationController
   def display
     @user = current_user
     @projects = @user.projects
+    
   end
 
   def new
+    # @categories = Category.all
+
     @project = Project.new
   end
 
   def all
     # @projects = Project.all
+    @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(5)
+
   end
 
   def show
-    @comments = @project.comments
+    @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(10)
   end
 
   def create
+
 
     @project = Project.new(project_params)
     @project.user = current_user

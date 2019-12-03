@@ -1,86 +1,74 @@
-
 <div id="product-modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"><%= @project.name %></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <%= form_for @project, remote: true do |f| %>
-        <div class="modal-body">
-          <div class="form-group">
-            <%= f.label :name %>
-            <%= f.label :author %>
-          </div>
+      <div class="modal-header ">
+        <div style="flex-direction:column;">
+          <h2 class="modal-title"><%= @project.name %></h2>
+          <h5>By
+            <%= link_to "#{@project.user.name}", profile_path(@project.user) %></h5>
         </div>
-      <% end %>
 
-      <%= @project.name %>
-      <%= image_tag @project.project_photo.url, size: "200x200" %>
-      <%= @project.url %>
-      <%= @project.lead %>
-      <%= @project.description %>
-      <%= @project.repository %>
-      <%= @project.user.name %>
-      <%= @project.comments.count %>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+      </div>
 
-      <% @project.categories.each do |category| %>
-        <%= category.name %>
-      <% end %>
+      <div class="modal-body">
+        <%= image_tag @project.project_photo.url, :width => '100%' %>
+        <div class="container my-3 ">
+          <p><%= link_to "Demo", URI::HTTP.build({:host => @project.url}).to_s, target: "_blank" %></p>
+          <p><%= link_to "Repositorio", URI::HTTP.build({:host => @project.repository}).to_s, target: "_blank" %></p>
+          <p><%= @project.lead %></p>
+          <p><%= @project.description %></p>
 
-      <div class="row">
-      	<div class="col-md-4">
-          <% if user_signed_in? %>
-        		<div class="well well-sm">
-          			<legend>Comentar:</legend>
-            			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
-            				<div class="form-group">
-            					<div class="col-md-12">
-            						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
-            					</div>
-            				</div>
-            				<%= f.submit 'Comentar', class: 'btn btn-primary' %>
-          		   <% end %>
-        		</div>
+          <% @project.categories.each do |category| %>
+            <p><%= category.name %></p>
           <% end %>
 
-      	</div>
-      	<div class="col-md-8">
-      		<% if @project.comments != nil%>
-      			<% @project.comments.each do |comment| %>
-      				<div class="well well-sm">
-      					<strong><%= comment.user.name %>:</strong>
-      					<br>
-      					<%= comment.content %>
-
-                <% if can? :destroy, comment %>
-      					<div class="text-right">
-      						<%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-xs btn-danger' %>
-      					</div>
-                <% end %>
-
-      				</div>
-      			<% end %>
-      		<% end %>
-      	</div>
+        </div>
       </div>
 
-      <% if can? :update, @project %>
-        <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-sm btn-success' %>
-      <% end %>
+      <div class="modal-footer">
+        <div class="container">
 
-      <% if can? :show, @project %>
-        <%= link_to 'Show', project_path(@project), class: 'btn btn-sm btn-info' %>
-      <% end %>
+        <div class="col">
+          <% if @comments != nil%>
+            <% @comments.each do |comment| %>
+              <div class="justify-content-center">
+                <strong><%= comment.user.name %>:</strong>
+                <% if can? :destroy, comment %>
+                    <%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-sm btn-danger ml-5' %>
+                <% end %>
+                <p><%= comment.content %><br>
+                <small><%= time_ago_in_words(comment.created_at) %></small></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
 
-      <% if can? :destroy, @project %>
-        <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
-      <% end %>
-
-
-
-
-
+        <% if user_signed_in? %>
+      		<div class="col card card-body bg-light">
+      			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
+      				<div class="form-group">
+      					<div class="col-md-12">
+      						<legend>Comentar:</legend>
+      						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
+      						<%= f.submit 'Comentar', class: 'btn btn-primary' %>
+      					</div>
+      				</div>
+      		  <% end %>
+        	</div>
+        <% end %>
     </div>
   </div>
+
+    <% if can? :update, @project %>
+      <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-sm btn-success' %>
+    <% end %>
+
+    <% if can? :destroy, @project %>
+      <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
+    <% end %>
+
+  </div>
+</div>
 </div>

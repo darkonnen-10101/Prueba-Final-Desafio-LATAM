@@ -14,4 +14,15 @@ class Project < ApplicationRecord
   mount_uploader :project_photo, ImageUploader
 
   validates :project_photo, presence: true
+  validates :name, presence: true
+  validates :url, presence: true
+  validates :lead, presence: true
+  validates :description, presence: true
+  validates :repository, presence: true
+  
+  #
+  # paginates_per 3
+  #
+  # default_scope ->{ order('created_at') }
+
 end
