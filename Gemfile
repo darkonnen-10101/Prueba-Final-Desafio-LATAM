@@ -36,7 +36,6 @@ gem 'omniauth-github'
 
 # gem 'friendly_id' rails generate friendly_id
 
-gem 'kmflow'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
