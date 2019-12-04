@@ -9,6 +9,9 @@
 Project.destroy_all
 User.destroy_all
 
+admin = User.create(name: "admin", email:"admin@admin", password: "123123", avatar: Rails.root.join("app/assets/images/profile.png").open, city: "Admin city", course: "Admin course")
+admin.add_role :admin
+
 10.times do |i|
 
   u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", avatar: Rails.root.join("app/assets/images/profile.png").open, city: "city#{i}", course: "Course#{i}")
