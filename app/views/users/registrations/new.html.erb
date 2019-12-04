@@ -1,58 +1,86 @@
-<div class="mx-5">
-
-  <h2>Sign up</h2>
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<div class="container text-center">
   <%= render "devise/shared/error_messages", resource: resource %>
+</div>
 
-  <div class="field">
-    <%= f.label :name %><br/>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+<div class="daily">
+   <p class="daily-title ml-5">Desafío LATAM</p>
+   <!-- <div class="buttons">
+     <button class="btn1 sign">Sign up</button>
+   </div> -->
+</div>
 
-  <div class="field">
-    <%= f.label :city %><br/>
-    <%= f.select :city, raw("<option>Córdoba</option><option>Santiago</option><option>Valparaíso</option>"), class: 'form_input' %>
-  </div>
+<div class="modal1 open">
+   <div class="wrapper">
 
-  <div class="field">
-    <%= f.label :course %><br/>
-    <%= f.select :course, raw("<option>Desarrollo Full Stack</option><option>Desarrollo Front End</option><option>Data Science</option><option>Diseño UX/UI</option><option>Desarrollo Sitios Web</option><option>Marketing Digital</option><option>Desarrollo Videojuegos</option><option>Desarrollo Android</option>"), class: 'form_input' %>
-  </div>
+      <!-- Title -->
+      <div class="title">
+         <h1>Sign Up</h1>
+      </div>
+      <!-- end Title -->
 
-  <div class="field">
-    <%= f.label :bio %><br/>
-    <%= f.text_area:bio, autocomplete: "bio" %>
-  </div>
+      <!-- Left Container -->
+      <div class="left">
+         <div class="content">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-  <div class="field">
-    <%= f.label :avatar %><br/>
-    <%= f.file_field :avatar, autocomplete: "avatar" %>
-  </div>
+               <div class="input-wrapper">
+                  <label for="name">Name</label>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+               </div>
 
-  <div class="field">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+               <div class="input-wrapper select">
+                 <label for="City">City</label>
+                  <%= f.select :city, raw("<option>Córdoba</option><option>Santiago</option><option>Valparaíso</option>"), class: 'form_input form-input select' %>
+               </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %>
-        characters minimum)</em>
-    <% end %><br/>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+               <div class="input-wrapper select">
+                 <label for="Course">Course</label>
+                  <%= f.select :course, raw("<option>Desarrollo Full Stack</option><option>Desarrollo Front End</option><option>Data Science</option><option>Diseño UX/UI</option><option>Desarrollo Sitios Web</option><option>Marketing Digital</option><option>Desarrollo Videojuegos</option><option>Desarrollo Android</option>"), class: 'form_input form-input select' %>
+               </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+               <div class="input-wrapper">
+                  <label for="Bio">Bio</label>
+                  <%= f.text_area:bio, autocomplete: "bio" %>
+               </div>
+               <div class="input-wrapper">
+                  <label  for="Avatar">Avatar</label>
+                  <%= f.file_field :avatar, autocomplete: "avatar"%>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-  <% end %>
+               </div>
+               <div class="input-wrapper">
+                  <label for="Email">Email</label>
+                  <%= f.email_field :email, autocomplete: "email" %>
+               </div>
+               <div class="input-wrapper">
+                  <label for="Password">Password</label>
+                  <%= f.password_field :password, autocomplete: "new-password" %>
+               </div>
 
-  <%= render "users/shared/links" %>
+               <div class="input-wrapper">
+                 <label for="Confirm">Password confirmation</label>
+                 <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+               </div>
+
+
+
+            <div class="buttons">
+              <%= f.submit "Sign up", class:"btn1 sign" %>
+            </div>
+
+            <div class="my-3">
+              <%= render "users/shared/links" %>
+            </div>
+
+          </div>
+            <% end %>
+
+      </div>
+      <!-- end Left Container -->
+
+      <!-- Right Container -->
+      <div class="right">
+      </div>
+      <!-- end Right Container -->
+
+   </div>
 </div>

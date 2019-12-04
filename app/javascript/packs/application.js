@@ -10,7 +10,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("chart.js")
-
+require("packs/custom")
 
 
 

@@ -1,29 +1,59 @@
-<div class="mx-5">
+<div class="container text-center">
+  <%= render "devise/shared/error_messages", resource: resource %>
+</div>
 
-  <h2>Log in</h2>
+<div class="daily">
+  <p class="daily-title ml-5">Desafío LATAM</p>
+  <!-- <div class="buttons"> <button class="btn1 sign">Sign up</button> </div> -->
+</div>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="modal1 open">
+  <div class="wrapper">
 
-  <div class="field">
-    <%= f.label :password %><br/>
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <!-- Title -->
+    <div class="title">
+      <h1>Log In</h1>
     </div>
-  <% end %>
+    <!-- end Title -->
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <!-- Left Container -->
+    <div class="left">
+      <div class="content">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="input-wrapper">
+          <label for="Email">Email</label>
+          <%= f.email_field :email, autocomplete: "email" %>
+        </div>
+        <div class="input-wrapper">
+          <label for="Password">Password</label>
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field text-info">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="buttons">
+          <%= f.submit "Log In", class:"btn1 sign" %>
+        </div>
+
+        <div class="my-3">
+          <%= render "users/shared/links" %>
+        </div>
+
+      </div>
+    <% end %>
+
   </div>
-  <% end %>
+  <!-- end Left Container -->
 
-  <%= render "users/shared/links" %>
+  <!-- Right Container -->
+  <div class="right1"></div>
+  <!-- end Right Container -->
+
+</div>
 </div>

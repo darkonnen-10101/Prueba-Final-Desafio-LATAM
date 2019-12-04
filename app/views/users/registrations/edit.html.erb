@@ -1,72 +1,89 @@
-<div class="mx-5">
+<div class="container text-center">
+  <%= render "devise/shared/error_messages", resource: resource %>
+</div>
 
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="daily">
+   <p class="daily-title ml-5"><%= @user.name %></p>
+   <!-- <div class="buttons">
+     <button class="btn1 sign">Sign up</button>
+   </div> -->
+</div>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<div class="modal1 open">
+   <div class="wrapper">
 
-    <div class="field">
-      <%= f.label :name %><br/>
-      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-    </div>
+      <!-- Title -->
+      <div class="title">
+         <h1>Update</h1>
+      </div>
+      <!-- end Title -->
 
-    <div class="field">
-      <%= f.label :city %><br/>
-      <%= f.select :city, raw("<option>Córdoba</option><option>Santiago</option><option>Valparaíso</option>"), class: 'form_input' %>
-    </div>
+      <!-- Left Container -->
+      <div class="left">
+         <div class="content">
+           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-    <div class="field">
-      <%= f.label :course %><br/>
-      <%= f.select :course, raw("<option>Desarrollo Full Stack</option><option>Desarrollo Front End</option><option>Data Science</option><option>Diseño UX/UI</option><option>Desarrollo Sitios Web</option><option>Marketing Digital</option><option>Desarrollo Videojuegos</option><option>Desarrollo Android</option>"), class: 'form_input' %>
-    </div>
+               <div class="input-wrapper">
+                  <label for="name">Name</label>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+               </div>
 
-    <div class="field">
-      <%= f.label :bio %><br/>
-      <%= f.text_area:bio, autocomplete: "bio" %>
-    </div>
+               <div class="input-wrapper select">
+                 <label for="City">City</label>
+                  <%= f.select :city, raw("<option>Córdoba</option><option>Santiago</option><option>Valparaíso</option>"), class: 'form_input form-input select' %>
+               </div>
 
-    <div class="field">
-      <%= f.label :avatar %><br/>
-      <%= f.file_field :avatar, autocomplete: "avatar" %>
-    </div>
+               <div class="input-wrapper select">
+                 <label for="Course">Course</label>
+                  <%= f.select :course, raw("<option>Desarrollo Full Stack</option><option>Desarrollo Front End</option><option>Data Science</option><option>Diseño UX/UI</option><option>Desarrollo Sitios Web</option><option>Marketing Digital</option><option>Desarrollo Videojuegos</option><option>Desarrollo Android</option>"), class: 'form_input form-input select' %>
+               </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+               <div class="input-wrapper">
+                  <label for="Bio">Bio</label>
+                  <%= f.text_area:bio, autocomplete: "bio" %>
+               </div>
+               <div class="input-wrapper">
+                  <label  for="Avatar">Avatar</label>
+                  <%= f.file_field :avatar, autocomplete: "avatar"%>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+               </div>
+               <div class="input-wrapper">
+                  <label for="Email">Email</label>
+                  <%= f.email_field :email, autocomplete: "email" %>
+               </div>
+
+               <div class="input-wrapper">
+                 <%= f.label :current_password %>
+                 <%= f.password_field :current_password, autocomplete: "current-password" %>
+               </div>
+
+            <div class="buttons">
+              <div class="actions ">
+                <%= f.submit "Update", class:"btn1 sign" %>
+              </div>
 
 
-    <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
-    </div>
+          </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
+            <% end %>
 
-    <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Update" %>
-    </div>
-  <% end %>
-
+<div class="my-2">
   <h3>Cancel my account</h3>
-
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
+  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn1 sign" %></p>
   <%= link_to "Back", :back %>
+
+</div>
+
+            </div>
+
+
+      </div>
+      <!-- end Left Container -->
+
+      <!-- Right Container -->
+      <div class="right2">
+      </div>
+      <!-- end Right Container -->
+
+   </div>
 </div>
