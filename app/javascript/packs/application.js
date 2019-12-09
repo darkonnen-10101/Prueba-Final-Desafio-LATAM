@@ -12,7 +12,7 @@ require("channels")
 require("chart.js")
 // require('jquery')
 require("packs/custom")
-require("packs/amsify.suggestags")
+// require("packs/suggestags")
 
 
 

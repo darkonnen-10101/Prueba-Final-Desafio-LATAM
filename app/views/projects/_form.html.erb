@@ -21,13 +21,16 @@
       <div class="form-group">
            <%= label :category_id, 'Category', class: 'col-lg-2 control-label' %>
           <div class="col-lg-4">
-            <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name), class: 'chosen-select' %>
+            <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
+
           </div>
       </div>
 
   <% end %>
 
-  <input type="text" name="color" value="Orange,Black">
+  <input type="text" name="color" value="">
+
+
 
 
 

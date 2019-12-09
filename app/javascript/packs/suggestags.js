@@ -1,38 +1,5 @@
+$( document ).ready(function() {
 
-$('input[name="color"]').amsifySuggestags({
-type : 'amsify',
-suggestions: ['Black', 'White', 'Red', 'Blue', 'Green', 'Orange']
-
-});
-
-$('input[name="color"]').amsifySuggestags({
-  suggestionsAction : {
-    url: '/path/to/suggestions/',
-    beforeSend : function() {
-      console.info('beforeSend');
-    },
-    success: function(data) {
-      console.info('success');
-    },
-    error: function() {
-      console.info('error');
-    },
-    complete: function(data) {
-      console.info('complete');
-    }
-  }
-});
-
-/**
- * Amsify Suggestags
- * https://github.com/amsify42/jquery.amsify.suggestags
- * http://www.amsify42.com
- */
-
-/**
- * AmsifySuggestags made global
- * @type AmsifySuggestags
- */
 var AmsifySuggestags;
 
 (function (factory) {
@@ -730,4 +697,38 @@ var AmsifySuggestags;
           amsifySuggestags._init();
         });
     };
+
+    $('input[name="color"]').amsifySuggestags({
+      type : 'bootstrap',
+      suggestions: ['Black', 'White', 'Red', 'Blue', 'Green', 'Orange'],
+      whiteList: true,
+      defaultTagClass: 'badge',
+    	tagLimit: 5,
+      afterAdd : function(value) {
+          console.info(value); // Parameter will be value
+      },
+      afterRemove : function(value) {
+          console.info(value); // Parameter will be value
+      },
+    });
+
+
+    // console.log( "ready!" );
+
+    // amsifySuggestags = new AmsifySuggestags($('input[name="color"]'));
+    // amsifySuggestags._settings({
+    // 	suggestions: ['Black', 'White', 'Red', 'Blue', 'Green', 'Orange'],
+    //   type : 'bootstrap',
+    //   whiteList: true,
+    //   defaultTagClass: 'badge',
+    //   tagLimit: 5
+    //
+    // })
+    // amsifySuggestags._init();
+
+
 }));
+
+
+
+});
