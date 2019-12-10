@@ -3,6 +3,7 @@ class User < ApplicationRecord
   include RailsAdminCharts
 
   validates :email, uniqueness: true
+  validates :name, uniqueness: true
 
 
   mount_uploader :avatar, ImageUploader

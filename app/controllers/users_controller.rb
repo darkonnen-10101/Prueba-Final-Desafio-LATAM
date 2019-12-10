@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
 
   def profile
+    # @user = User.find_by(name: params[:name])
+    @user = User.find_by(name: params[:name])
     @projects = @user.projects
   end
 
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:id)
+    params.require(:user).permit(:id, :name)
   end
 
 

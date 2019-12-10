@@ -5,6 +5,8 @@ ruby '2.6.3'
 
 gem 'kaminari'
 
+gem 'chosen-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
 # Use postgresql as the database for Active Record

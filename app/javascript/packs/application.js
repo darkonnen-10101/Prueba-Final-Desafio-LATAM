@@ -12,7 +12,11 @@ require("channels")
 require("chart.js")
 // require('jquery')
 require("packs/custom")
+require("packs/upload")
+
 // require("packs/suggestags")
+require("chosen-jquery")
+
 
 
 
