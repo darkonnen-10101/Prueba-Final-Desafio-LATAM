@@ -5,7 +5,7 @@
         <div style="flex-direction:column;">
           <h2 class="modal-title"><%= @project.name %></h2>
           <h5>By
-            <%= link_to "#{@project.user.name}", profile_path(@project.user) %></h5>
+            <%= link_to "#{@project.user.name}", profile_path(@project.user.name) %></h5>
         </div>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -30,7 +30,7 @@
       <div class="modal-footer">
         <div class="container">
 
-        <div class="col">
+        <div class="col"  id="#comments">
           <% if @comments != nil%>
             <% @comments.each do |comment| %>
               <div class="justify-content-center">
@@ -46,18 +46,46 @@
         </div>
 
         <% if user_signed_in? %>
+        <div>
+
       		<div class="col card card-body bg-light">
-      			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
+      			<%= form_with(model: [@project, Comment.new], remote: true , id:"myForm" ,html: { class: 'form-horizontal' }) do |f| %>
       				<div class="form-group">
       					<div class="col-md-12">
       						<legend>Comentar:</legend>
-      						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
+      						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...',  class: 'form-control' %>
       						<%= f.submit 'Comentar', class: 'btn btn-primary' %>
       					</div>
       				</div>
       		  <% end %>
         	</div>
         <% end %>
+
+      </div>
+
+      <!-- <script>
+        $("[name=commit]").click(function(e){
+          e.preventDefault();
+          var form = $("#myForm");
+          $.ajax({
+            url: form.action,
+            type: 'POST',
+            dataType: 'json',
+            data: form.serialize()
+          })
+          .done(function(data) {
+            console.log(data.content);
+          })
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            console.log("complete");
+          });
+
+        });
+      </script> -->
+
     </div>
   </div>
 

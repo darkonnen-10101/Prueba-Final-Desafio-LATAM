@@ -1,35 +1,39 @@
-<%= form_with(model: project, local: true, id: "myForm", html: { class: 'form-horizontal' }) do |f| %>
+<div class="container upload d-flex justify-content-center text-center py-5">
+
+  <%= form_with(model: project, local: true, id: "myForm", html: { class: 'form-horizontal' }) do |f| %>
   <% if project.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
-    <ul>
-      <% project.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %>
+        prohibited this project from being saved:</h2>
+      <ul>
+        <% project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
   <fieldset>
     <div class="form-group">
-      <%= f.label :name, 'Name', class: 'col-lg-2 control-label' %>
-      <div class="col-lg-4">
-        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Título del post' %>
+      <%= f.label :name, 'Project title', class: 'control-label' %>
+      <div class="">
+        <%= f.text_field :name, autofocus: true, class: 'form-control'%>
       </div>
     </div>
 
-  <%= form_tag :categories do   %>
-      <div class="form-group">
-           <%= label :category_id, 'Category', class: 'col-lg-2 control-label' %>
-          <div class="col-lg-4">
-            <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
-
-          </div>
+    <%= form_tag :categories do %>
+    <div class="form-group">
+      <%= label :category_id, 'Category', class: 'control-label' %>
+      <div class="">
+        <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
       </div>
+    </div>
+    <% end %>
 
-  <% end %>
+  <div class="form-group">
+    <label for="Select">Category</label>
+    <div class="">
 
-
-    <select data-placeholder="Choose a tag" class="chosen-select" name="tagging" multiple tabindex="4">
+    <select data-placeholder="Choose a tag" class="chosen-select w-100" name="tagging" multiple="multiple" tabindex="4">
       <option value=""></option>
       <option value="1">Javascript</option>
       <option value="2">ReactJS</option>
@@ -58,45 +62,47 @@
       <option value="25">SQL</option>
       <option value="26">MySQL</option>
     </select>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :url, 'Url', class: 'control-label' %>
+    <div class="">
+      <%= f.text_field :url, class: 'form-control'%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :repository, 'Repository', class: 'control-label' %>
+    <div class="">
+      <%= f.text_field :repository, class: 'form-control'%>
+    </div>
+  </div>
 
 
+  <div class="form-group">
+    <%= f.label :project_photo, 'Project photo', class: 'control-label' %>
+    <div class="">
+      <%= f.file_field :project_photo, class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :lead, 'Short description', class: 'control-label' %>
+    <div class="">
+      <%= f.text_field :lead, class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, 'Long description', class: 'control-label' %>
+    <div class="">
+      <%= f.text_area :description, class: 'form-control'%>
+    </div>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :url, 'Url', class: 'col-lg-2 control-label' %>
-      <div class="col-lg-4">
-        <%= f.text_field :url, class: 'form-control', placeholder: 'Contenido del post' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :project_photo, 'Project photo', class: 'col-lg-2 control-label' %>
-      <div class="col-lg-4">
-        <%= f.file_field :project_photo, class: 'form-control', placeholder: 'Contenido del post' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :lead, 'Lead', class: 'col-lg-2 control-label' %>
-      <div class="col-lg-4">
-        <%= f.text_field :lead, class: 'form-control', placeholder: 'Contenido del post' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :description, 'Description', class: 'col-lg-2 control-label' %>
-      <div class="col-lg-4">
-        <%= f.text_field :description, class: 'form-control', placeholder: 'Contenido del post' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :repository, 'Repository', class: 'col-lg-2 control-label' %>
-      <div class="col-lg-4">
-        <%= f.text_field :repository, class: 'form-control', placeholder: 'Contenido del post' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <%= f.submit 'Confirmar', class: 'btn btn-primary' %>
-      </div>
-    </div>
-  </fieldset>
+  <div class="form-group mt-5">
+      <%= f.submit 'Confirmar', class: 'square-button ' %>
+  </div>
+</fieldset>
 <% end %>
+
+</div>

@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(content:params[:comment][:content], user: current_user)
 		@project.comments << @comment
 		@comment.save
-		redirect_to root_path
+    # redirect_to root_path
   end
 
   def destroy

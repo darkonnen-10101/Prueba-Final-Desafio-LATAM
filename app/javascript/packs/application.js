@@ -15,7 +15,7 @@ require("packs/custom")
 require("packs/upload")
 
 // require("packs/suggestags")
-require("chosen-jquery")
+// require("chosen-jquery")
 
 
 

@@ -52,7 +52,6 @@ class ProjectsController < ApplicationController
   def all
     # @projects = Project.all
     @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(5)
-
   end
 
   def show

@@ -1,3 +1,74 @@
+.about-page{
+  margin-bottom: 0;
+  height: 550px;
+  // background-image: url("https://i.pinimg.com/originals/0b/a3/d6/0ba3d60362c7e6d256cfc1f37156bad9.jpg");
+  border-radius: 0;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--image-url) center center;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+}
+
+.jumbotron1 {
+  margin-bottom: 0;
+  height: 550px;
+  // background-image: url("https://i.pinimg.com/originals/0b/a3/d6/0ba3d60362c7e6d256cfc1f37156bad9.jpg");
+  border-radius: 0;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--image-url) center center;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+}
+
+
+.jumbotron1 h2 {
+  background-color: #FFFFFF;
+  color: #38353f;
+  display: inline-block;
+  font-weight: 700;
+  padding: 10px 35px;
+  border-radius: 5px;
+}
+
+.jumbotron1 h3 {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+
+.about-page h1, .about-page h2 {
+  color: #fff;
+}
+
+.about-page h1 {
+  font-size: 90px;
+}
+
+.about-page h2 {
+  font-weight: lighter;
+}
+
+.about-img {
+  width: 300px;
+}
+
+.buy-me {
+  background-color: #009ee3!important;
+}
 
 body {
     padding-top: 87px;
@@ -56,29 +127,16 @@ section .container .row {
   justify-content: center;
 }
 
-.jumbotron {
-  display: flex;
-  align-items: center;
-  height: 350px;
-  background-image: url("https://www.veracode.com/sites/default/files/styles/blog_post_resize_960/public/developer-guide-blog-2.png?itok=uyhlUkTW");
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 0;
-}
+// .jumbotron1 {
+//   display: flex;
+//   align-items: center;
+//   height: 350px;
+//   background-image: url("https://www.incimages.com/uploaded_files/image/970x450/software-computer-code-1940x900_35196.jpg");
+//   background-size: cover;
+//   background-position: center;
+//   margin-bottom: 0;
+// }
 
-.jumbotron h2 {
-  background-color: #FFFFFF;
-  color: #38353f;
-  display: inline-block;
-  font-weight: 700;
-  padding: 10px 35px;
-  border-radius: 5px;
-}
-
-.jumbotron h3 {
-  color: #FFFFFF;
-  font-weight: bold;
-}
 
 .navbar-dark {
   background-color: #38353f!important;
@@ -91,7 +149,7 @@ section .container .row {
 
 .content-wrap {
   // padding-top: 2rem;
-  padding-bottom: 5rem;
+  // padding-bottom: 5rem;
 }
 
 @font-face {
@@ -352,17 +410,3 @@ figure.snip0061.hover:before {
   -webkit-transform: skewX(0deg) translateX(0px);
   transform: skewX(0deg) translateX(0px);
 }
-
-
-// html {
-//   height: 100%;
-// }
-// body {
-//   background-color: #212121;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-flow: wrap;
-//   margin: 0;
-//   height: 100%;
-// }
