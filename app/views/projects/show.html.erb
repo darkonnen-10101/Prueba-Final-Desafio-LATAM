@@ -9,36 +9,55 @@
 
 		<p>
 			<strong>Publicado por:</strong>
-			<%= @project.user.name %></p>
+			<%= link_to "#{@project.user.name}", profile_path(@project.user.name) %>
+		</p>
 
-		<div class="col">
-			<p>
-				<%= image_tag @project.project_photo.url, :width => '100%' %>
-			</p>
-			<h3><%= @project.lead %></h3>
-			<h4><%= @project.description %></h4>
+		<div class="my-3">
+
+			<% if can? :update, @project %>
+				<%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-info' %>
+			<% end %>
+
 		</div>
 
-		<% if can? :update, @project %>
-			<%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-success' %>
-		<% end %>
+		<div class="">
+			<%= image_tag @project.project_photo.url, :width => '70%' %>
 
-		<%= link_to 'Volver', root_path, class: 'btn btn-info' %>
+			<div class="my-3">
+				<h3><%= @project.lead %></h3>
+				<br>
+				<h4><%= @project.description %></h4>
+			</div>
+			<p><%= link_to "Demo", URI::HTTP.build({:host => @project.url}).to_s, target: "_blank" %></p>
+			<p><%= link_to "Repository", URI::HTTP.build({:host => @project.repository}).to_s, target: "_blank" %></p>
+
+			<% @project.categories.each do |category| %>
+				<small class="badge badge-info"><%= category.name %>
+					<% if can? :update, @project %>
+						<a href="<%= remove_tag_project_path(@project, category) %>" data-method="delete">
+							<span class="badge text-white">X</span>
+						</a>
+					<% end %>
+				</small>
+			<% end %>
+
+		</div>
 
 	</div>
 
 	<% if @comments != nil %>
 		<% @comments.each do |comment| %>
 			<div class="card card-body bg-light mt-5">
-				<strong><%= comment.user.name %>:</strong>
+				<span>
+					<strong><%= comment.user.name %>:</strong>
+					<% if can? :destroy, comment %>
+						<%= link_to 'Delete', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-sm btn-danger float-right' %>
+					<% end %>
+				</span>
+
 				<br>
 				<p><%= comment.content %></p>
-
-				<% if can? :destroy, comment %>
-					<div class="text-right">
-						<%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-xs btn-danger' %>
-					</div>
-				<% end %>
+				<small><%= time_ago_in_words(comment.created_at) %></small>
 
 			</div>
 		<% end %>
@@ -47,20 +66,24 @@
 	<% if user_signed_in? %>
 		<div class="card card-body bg-light mt-5">
 			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
-				<div class="form-group">
-					<div class="col-md-12">
-						<legend>Comentar:</legend>
-						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
-						<%= f.submit 'Comentar', class: 'btn btn-primary' %>
-					</div>
+			<div class="form-group">
+				<div class="col-md-12">
+					<legend>Comment:</legend>
+					<%= f.text_area :content, placeholder: 'Write your comment here...', class: 'form-control' %>
+					<%= f.submit 'Send', class: 'btn btn-primary' %>
 				</div>
-		  <% end %>
-  	</div>
-  <% end %>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+
+<div class="container my-5 text-center">
+	<%= link_to 'Back', root_path, class: 'btn btn-info' %>
+</div>
 
 <div class="container mt-5 d-flex justify-content-center">
 	<% if @comments != nil%>
-  	<%= paginate @comments %>
+		<%= paginate @comments %>
 	<% end %>
 
 </div>

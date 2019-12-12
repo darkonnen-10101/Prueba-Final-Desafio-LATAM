@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  get 'filter', to: 'projects#filter', as: 'filter'
 
   resources :categories
 
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
     member do
       post 'add_tag'
       get 'all', to: 'projects#all', as: 'all'
-      delete 'remove_tag/:tag_id', to: 'projects#remove_tag', as: 'remove_tag'
+      delete 'remove_tag/:category_id', to: 'projects#remove_tag', as: 'remove_tag'
     end
     # resources :tags
     resources :comments, only: [:create, :update, :destroy]

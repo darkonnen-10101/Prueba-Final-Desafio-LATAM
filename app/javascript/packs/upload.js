@@ -1,6 +1,6 @@
 $(document).ready(function(){
-
 	//material contact form
+	 $(".chosen-select").chosen({width: "95%"}); 
 	$('.contact-form').find('.form-control').each(function() {
 	  var targetItem = $(this).parent();
 	  if ($(this).val()) {

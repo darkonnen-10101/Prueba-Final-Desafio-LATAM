@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" data-toggle="affix">
+  <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarsExample11">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= projects_path %>">All projects</a>
+        </li>
+        <li class="nav-item">
+          <%=link_to "Full stack", filter_path(:value => "Data Science"), class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to "Front end", filter_path(:value => "Unity"), class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to "Data science", filter_path(:value => "Data Science"), class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= root_path %>">UX/UI</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= root_path %>">Web development</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= root_path %>">Digital Marketing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= root_path %>">Unity</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= root_path %>">Android</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

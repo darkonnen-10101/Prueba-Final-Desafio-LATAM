@@ -14,8 +14,6 @@ require("chart.js")
 require("packs/custom")
 require("packs/upload")
 
-// require("packs/suggestags")
-// require("chosen-jquery")
 
 
 

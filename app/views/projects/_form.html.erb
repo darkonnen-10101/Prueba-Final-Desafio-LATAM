@@ -20,20 +20,12 @@
       </div>
     </div>
 
-    <%= form_tag :categories do %>
-    <div class="form-group">
-      <%= label :category_id, 'Category', class: 'control-label' %>
-      <div class="">
-        <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
-      </div>
-    </div>
-    <% end %>
 
   <div class="form-group">
     <label for="Select">Category</label>
     <div class="">
 
-    <select data-placeholder="Choose a tag" class="chosen-select w-100" name="tagging" multiple="multiple" tabindex="4">
+    <!-- <select data-placeholder="Choose a tag" class="chosen-select w-100" name="tagging" multiple="multiple" tabindex="4">
       <option value=""></option>
       <option value="1">Javascript</option>
       <option value="2">ReactJS</option>
@@ -61,9 +53,14 @@
       <option value="24">PostgreSQL</option>
       <option value="25">SQL</option>
       <option value="26">MySQL</option>
-    </select>
+    </select> -->
+
+
+      <%=  select_tag :category_id, options_for_select(Category.all.collect{ |u| [u.name, u.id] }), class: "chosen-select", multiple: true %>
+
+    </div>
   </div>
-  </div>
+
 
   <div class="form-group">
     <%= f.label :url, 'Url', class: 'control-label' %>

@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(content:params[:comment][:content], user: current_user)
 		@project.comments << @comment
 		@comment.save
-    # redirect_to root_path
+    redirect_to @project
   end
 
   def destroy
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     @project = Project.find(params[:project_id])
 		@comment = Comment.find(params[:id])
 		@comment.destroy
-		redirect_to root_path
+		redirect_to @project
   end
 
   # def index

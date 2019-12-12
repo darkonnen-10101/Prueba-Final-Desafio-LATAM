@@ -19,19 +19,26 @@ class ProjectsController < ApplicationController
     @projects = Project.page(params[:page]).order(created_at: :desc).per(9)
   end
 
+  def filter
+    # @projects = Project.all.joins(:categories).where(:categories => {name: params[:value]}).page(params[:page]).order(created_at: :desc).per(9)
+    @projects = Project.all.joins(:users).where(:course => {name: params[:value]}).page(params[:page]).order(created_at: :desc).per(9)
+
+  end
+
+
   def edit
 
   end
 
   def add_tag
-    tag = params[:tagging]
-    @project.categories << Category.find_by(id: tag)
-
+    @project.categories << Category.find_by(id: params[:category_id])
   end
 
   def remove_tag
-    category = Category.find(params[:id])
+    category = Category.find_by(id: params[:category_id])
     @project.categories.delete(category)
+    redirect_to root_path
+
   end
 
 
@@ -54,6 +61,8 @@ class ProjectsController < ApplicationController
     @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(5)
   end
 
+
+
   def show
     @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(10)
   end
@@ -73,10 +82,20 @@ class ProjectsController < ApplicationController
 
   def update
 
-    # @project.categories << Category.find_by(id: params[:category_id]) unless @project.categories.where(id: params[:category_id]).exists?
+    # cat = Category.find_by(id: params[:category_id])
+
+    # cat = params[:category_id]
+
+    params[:category_id].each do |cat|
+      if @project.categories.include? Category.find_by(id: cat)
+        next
+      else
+        @project.categories << Category.find_by(id: cat)
+      end
+    end
+
 
     if @project.update(project_params)
-       # @project.categories << Category.find_by(id: params[:category_id])
       render :show, status: :created, location: @project
     else
       render :edit
@@ -95,7 +114,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, :categories_attributes => [:id, :name, :category_id])
+    params.require(:project).permit(:name, :url, :project_photo, :lead, :description, :repository, :user_id, categories_attributes: [:id, :name, :category_id])
   end
 
 end

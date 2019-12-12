@@ -1,0 +1,9 @@
+<% @project.categories.each do |category| %>
+  <small class="badge badge-info"><%= category.name %>
+    <% if can? :update, @project %>
+      <a href="<%= remove_tag_project_path(@project, category) %>" data-method="delete">
+        <span class="badge text-white">X</span>
+      </a>
+    <% end %>
+  </small>
+<% end %>

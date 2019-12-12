@@ -5,24 +5,32 @@
         <div style="flex-direction:column;">
           <h2 class="modal-title"><%= @project.name %></h2>
           <h5>By
-            <%= link_to "#{@project.user.name}", profile_path(@project.user.name) %></h5>
-        </div>
+            <%= link_to "#{@project.user.name}", profile_path(@project.user.name) %>
+          </h5>
+          <% if can? :update, @project %>
+            <%= link_to 'Editar', edit_project_path(@project), class: 'btn  btn-info btn-sm' %>
+          <% end %>
+
+          <% if can? :destroy, @project %>
+            <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
+          <% end %>
+
+      </div>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
+
       </div>
 
       <div class="modal-body">
         <%= image_tag @project.project_photo.url, :width => '100%' %>
         <div class="container my-3 ">
           <p><%= link_to "Demo", URI::HTTP.build({:host => @project.url}).to_s, target: "_blank" %></p>
-          <p><%= link_to "Repositorio", URI::HTTP.build({:host => @project.repository}).to_s, target: "_blank" %></p>
+          <p><%= link_to "Repository", URI::HTTP.build({:host => @project.repository}).to_s, target: "_blank" %></p>
           <p><%= @project.lead %></p>
           <p><%= @project.description %></p>
 
-          <% @project.categories.each do |category| %>
-            <p><%= category.name %></p>
-          <% end %>
+          <%= render 'tags' %>
 
         </div>
       </div>
@@ -30,77 +38,55 @@
       <div class="modal-footer">
         <div class="container">
 
-        <div class="col"  id="#comments">
-          <% if @comments != nil%>
-            <% @comments.each do |comment| %>
-              <div class="justify-content-center">
-                <strong><%= comment.user.name %>:</strong>
-                <% if can? :destroy, comment %>
-                    <%= link_to 'Eliminar', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-sm btn-danger ml-5' %>
-                <% end %>
-                <p><%= comment.content %><br>
-                <small><%= time_ago_in_words(comment.created_at) %></small></p>
-              </div>
+          <div id="#comments">
+            <% if @comments != nil%>
+              <% @comments.each do |comment| %>
+                <div class="justify-content-center">
+                  <strong><%= comment.user.name %>:</strong>
+                  <% if can? :destroy, comment %>
+                    <%= link_to 'Delete', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-sm btn-danger float-right ' %>
+                  <% end %>
+                  <p><%= comment.content %><br>
+                    <small><%= time_ago_in_words(comment.created_at) %></small>
+                  </p>
+                </div>
+              <% end %>
             <% end %>
+          </div>
+
+          <% if user_signed_in? %>
+            <div>
+
+              <div class="col card card-body bg-light">
+                <%= form_with(model: [@project, Comment.new], remote: true , id:"myForm" ,html: { class: 'form-horizontal' }) do |f| %>
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <legend>Comment:</legend>
+                    <%= f.text_area :content, placeholder: 'Write your comment here...', class: 'form-control' %>
+                    <%= f.submit 'Send', class: 'btn btn-primary' %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
           <% end %>
-        </div>
 
-        <% if user_signed_in? %>
-        <div>
 
-      		<div class="col card card-body bg-light">
-      			<%= form_with(model: [@project, Comment.new], remote: true , id:"myForm" ,html: { class: 'form-horizontal' }) do |f| %>
-      				<div class="form-group">
-      					<div class="col-md-12">
-      						<legend>Comentar:</legend>
-      						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...',  class: 'form-control' %>
-      						<%= f.submit 'Comentar', class: 'btn btn-primary' %>
-      					</div>
-      				</div>
-      		  <% end %>
-        	</div>
-        <% end %>
+        <!-- <script> $("[name=commit]").click(function(e){ e.preventDefault(); var form = $("#myForm"); $.ajax({ url: form.action, type: 'POST', dataType: 'json', data: form.serialize() }) .done(function(data) { console.log(data.content); })
+        .fail(function() { console.log("error"); }) .always(function() { console.log("complete"); }); }); </script> -->
 
       </div>
-
-      <!-- <script>
-        $("[name=commit]").click(function(e){
-          e.preventDefault();
-          var form = $("#myForm");
-          $.ajax({
-            url: form.action,
-            type: 'POST',
-            dataType: 'json',
-            data: form.serialize()
-          })
-          .done(function(data) {
-            console.log(data.content);
-          })
-          .fail(function() {
-            console.log("error");
-          })
-          .always(function() {
-            console.log("complete");
-          });
-
-        });
-      </script> -->
-
     </div>
-  </div>
 
-    <% if can? :update, @project %>
-      <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-sm btn-success' %>
-    <% end %>
+      <% if can? :show, @project %>
+        <%= link_to 'Details', project_path(@project), class: 'btn btn-info' %>
+      <% end %>
 
-    <% if can? :show, @project %>
-      <%= link_to 'Show', project_path(@project), class: 'btn btn-sm btn-info' %>
-    <% end %>
 
-    <% if can? :destroy, @project %>
-      <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
-    <% end %>
 
-  </div>
+
+
+
+
 </div>
 </div>
