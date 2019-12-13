@@ -11,7 +11,9 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(content:params[:comment][:content], user: current_user)
 		@project.comments << @comment
 		@comment.save
-    redirect_to @project
+    # redirect_to @project
+    # render 'projects/create'
+    # render :json => @comment.to_json
   end
 
   def destroy

@@ -12,6 +12,10 @@ class Ability
         can :access, :rails_admin
         can :read, :dashboard
         can :manage, :all
+        can :manage, Category, :all
+        can :update, Category, :all
+        can :create, Category, :all
+
       else
 
         # can :read, :all
@@ -20,13 +24,7 @@ class Ability
         # can :create, Comment
         # can :read, Category, :all, public: true
         # can :edit, Project, :all
-        can :all, User
         can :profile, User
-
-        can :manage, Category, :all
-        can :update, Category, :all
-        can :create, Category, :all
-
 
 
         can :all, Project, :all

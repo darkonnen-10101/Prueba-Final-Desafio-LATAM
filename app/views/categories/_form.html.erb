@@ -16,10 +16,13 @@
         <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Título del post' %>
       </div>
     </div>
+    <% if user_signed_in? && current_user.has_role?(:admin) %>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
+
         <%= f.submit 'Confirmar', class: 'btn btn-primary' %>
       </div>
     </div>
+    <% end %>
   </fieldset>
 <% end %>

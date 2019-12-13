@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
 
   def filter
     # @projects = Project.all.joins(:categories).where(:categories => {name: params[:value]}).page(params[:page]).order(created_at: :desc).per(9)
-    @projects = Project.all.joins(:users).where(:course => {name: params[:value]}).page(params[:page]).order(created_at: :desc).per(9)
+    @projects = Project.joins(:user).all.where(:users => {course: params[:value]}).page(params[:page]).order(created_at: :desc).per(9)
 
   end
 
