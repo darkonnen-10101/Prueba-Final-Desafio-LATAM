@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
 		@comment.save
     # redirect_to @project
     # render 'projects/create'
-    # render :json => @comment.to_json
+    render :json => @comment.to_json
+
   end
 
   def destroy
@@ -22,7 +23,11 @@ class CommentsController < ApplicationController
     @project = Project.find(params[:project_id])
 		@comment = Comment.find(params[:id])
 		@comment.destroy
-		redirect_to @project
+		# redirect_to @project
+    respond_to do |format|
+      format.js {render 'projects/comdestroy'}
+    end
+
   end
 
   # def index

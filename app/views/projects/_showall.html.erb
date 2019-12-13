@@ -10,14 +10,14 @@
             <%= link_to "#{@project.user.name}", profile_path(@project.user.name) %>
           </h5>
           <% if can? :update, @project %>
-            <%= link_to 'Editar', edit_project_path(@project), class: 'btn  btn-info btn-sm' %>
+            <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-info btn-sm' %>
           <% end %>
 
           <% if can? :destroy, @project %>
             <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
           <% end %>
 
-      </div>
+        </div>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
@@ -40,32 +40,30 @@
       <div class="modal-footer">
         <div class="container">
 
-          <div id="comments2"  >
+          <div>
             <% if @comments != nil%>
               <% @comments.each do |comment| %>
                 <div class="justify-content-center">
                   <strong><%= comment.user.name %>:</strong>
                   <% if can? :destroy, comment %>
-                    <%= link_to 'Delete', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-sm btn-danger float-right ' %>
+                    <%= link_to 'Delete', project_comment_path(@project, comment), method: :delete, data: { remote: true }, class: 'btn btn-sm btn-danger float-right deletecom' %>
                   <% end %>
-                  <div >
-                  <p><%= comment.content %><br>
-                    <small><%= time_ago_in_words(comment.created_at) %></small>
-                  </p>
-                </div>
+                  <div>
+                    <p><%= comment.content %><br>
+                      <small><%= time_ago_in_words(comment.created_at) %></small>
+                    </p>
+                  </div>
                 </div>
               <% end %>
             <% end %>
           </div>
 
-
-
           <% if user_signed_in? %>
             <div>
 
               <div class="col card card-body bg-light">
-                <%= form_with(model: [@project, Comment.new], html: { class: 'form-horizontal' }) do |f| %>
                 <div class="form-group">
+                  <%= form_with(model: [@project, Comment.new], local: true, id: "myForm", html: { class: 'form-horizontal' }) do |f| %>
                   <div class="col-md-12">
                     <legend>Comment:</legend>
                     <%= f.text_area :content, placeholder: 'Write your comment here...', class: 'form-control' %>
@@ -75,50 +73,32 @@
               <% end %>
             </div>
           </div>
-          <% end %>
+        <% end %>
 
-          <script>
-
-            $("[name=commit]").click(function(e){
-              e.preventDefault();
-              var new_content = $("[name='comment[content]']").val();
-              $.ajax({
-                url: '<%= project_comments_path(@project) %>',
-                type: 'POST',
-                dataType: 'json',
-                data: {comment: {content: new_content}}
-              })
-              .done(function(data) {
-                console.log("success");
-              })
-              .fail(function() {
-                console.log("error");
-              })
-              .always(function() {
-                console.log("complete");
-              });
-
-            });
-
-          </script>
-
-
-
-        <!-- <script> $("[name=commit]").click(function(e){ e.preventDefault(); var form = $("#myForm"); $.ajax({ url: form.action, type: 'POST', dataType: 'json', data: form.serialize() }) .done(function(data) { console.log(data.content); })
-        .fail(function() { console.log("error"); }) .always(function() { console.log("complete"); }); }); </script> -->
-
+<script>
+  $("[name=commit]").click(function (e) {
+    e.preventDefault();
+    var new_content = $("[name='comment[content]']").val();
+    $.ajax({
+      url: form.action,
+      type: 'POST',
+      dataType: 'json',
+      data: {comment: {content: new_content}}
+    }).done(function (data) {
+      console.log(data.content);
+    }).fail(function () {
+      console.log("error");
+    }).always(function () {
+      console.log("complete");
+    });
+  });
+</script>
       </div>
     </div>
 
-      <% if can? :show, @project %>
-        <%= link_to 'Details', project_path(@project), class: 'btn btn-info' %>
-      <% end %>
+    <% if can? :show, @project %>
+      <%= link_to 'Details', project_path(@project), class: 'btn btn-info' %>
+    <% end %>
 
-
-
-
-
-
-
-</div>
+  </div>
 </div>

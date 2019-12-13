@@ -37,7 +37,10 @@ class ProjectsController < ApplicationController
   def remove_tag
     category = Category.find_by(id: params[:category_id])
     @project.categories.delete(category)
-    redirect_to root_path
+    # redirect_to root_path
+    respond_to do |format|
+      format.js 
+    end
 
   end
 
