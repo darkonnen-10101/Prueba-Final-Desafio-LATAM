@@ -18,8 +18,8 @@ admin.add_role :admin
 
 10.times do |i|
 
-  u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", avatar: Rails.root.join("app/assets/images/profile.png").open, city: "city#{i}", course: @courses[i])
-  p = Project.create(user: u, name: "Project#{i}", project_photo: Rails.root.join("app/assets/images/profile.png").open, url: "www.google.com", repository: "www.google.com", lead: "lorem ipsum", description: "lorem ipsum")
+  u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", avatar: File.open('app/assets/images/profile.png'), city: "city#{i}", course: @courses[i])
+  p = Project.create(user: u, name: "Project#{i}", project_photo: File.open('app/assets/images/profile.png'), url: "www.google.com", repository: "www.google.com", lead: "lorem ipsum", description: "lorem ipsum")
   p.categories << Category.new(name: @tags[i])
   11.times do |j|
     c = p.comments.build(content: "Lorem #{j} del proyecto #{i}", user: u, project: p)
