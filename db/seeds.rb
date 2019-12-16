@@ -13,13 +13,13 @@ Category.destroy_all
 @courses = ["Desarrollo Full Stack", "Desarrollo Front End", "Data Science", "Diseño UX/UI", "Desarrollo Sitios Web", "Marketing Digital", "Desarrollo Videojuegos", "Desarrollo Android", "Desarrollo Videojuegos", "Desarrollo Android"]
 @tags = ["Python", "Django", "Java", "Javascript", "Ruby", "Rails", "PHP", "Laravel", "Symfony", "Wordpress"]
 
-admin = User.create(name: "admin", email:"admin@admin", password: "123123", avatar: Rails.root.join("app/assets/images/profile.png").open, city: "Admin city", course: @courses[0])
+admin = User.create(name: "admin", email:"admin@admin", password: "123123", remote_avatar_url: 'https://profiles.utdallas.edu/img/default.png', city: "Admin city", course: @courses[0])
 admin.add_role :admin
 
 10.times do |i|
 
-  u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", avatar: File.open(File.join('app/assets/images/profile.png')), city: "city#{i}", course: @courses[i])
-  p = Project.create(user: u, name: "Project#{i}", project_photo: File.open(File.join('app/assets/images/profile.png')), url: "www.google.com", repository: "www.google.com", lead: "lorem ipsum", description: "lorem ipsum")
+  u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", remote_avatar_url: 'https://profiles.utdallas.edu/img/default.png', city: "city#{i}", course: @courses[i])
+  p = Project.create(user: u, name: "Project#{i}", remote_project_photo_url: 'https://pbs.twimg.com/media/CZGHPChUAAA3jqE.png', url: "www.google.com", repository: "www.google.com", lead: "lorem ipsum", description: "lorem ipsum")
   p.categories << Category.new(name: @tags[i])
   11.times do |j|
     c = p.comments.build(content: "Lorem #{j} del proyecto #{i}", user: u, project: p)
