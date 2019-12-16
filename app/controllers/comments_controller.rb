@@ -11,9 +11,22 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(content:params[:comment][:content], user: current_user)
 		@project.comments << @comment
 		@comment.save
+
+    @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(5)
+
+
+    # num = @comment.project.id
+    # @comments = Project.find(num).comments.page(params[:page]).order(created_at: :desc).per(5)
     # redirect_to @project
     # render 'projects/create'
-    render :json => @comment.to_json
+    # render json: @comment.as_json
+
+    respond_to do |format|
+      format.js {render 'projects/comcreate'}
+      format.html {render 'projects/comcreate'}
+    end
+
+
 
   end
 

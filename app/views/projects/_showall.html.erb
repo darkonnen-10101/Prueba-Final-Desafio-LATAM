@@ -1,5 +1,6 @@
-<div id="product-modal" class="modal fade">
-  <div class="modal-dialog">
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header ">
         <div style="flex-direction:column;">
@@ -14,10 +15,11 @@
           <% end %>
 
           <% if can? :destroy, @project %>
-            <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Post?' }, class: 'btn btn-sm btn-danger' %>
+            <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
           <% end %>
 
         </div>
+
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
@@ -37,62 +39,30 @@
         </div>
       </div>
 
-      <div class="modal-footer">
-        <div class="container">
+      <div class="modal-footer" >
 
-          <div>
-            <% if @comments != nil%>
-              <% @comments.each do |comment| %>
-                <div class="justify-content-center">
-                  <strong><%= comment.user.name %>:</strong>
-                  <% if can? :destroy, comment %>
-                    <%= link_to 'Delete', project_comment_path(@project, comment), method: :delete, data: { remote: true }, class: 'btn btn-sm btn-danger float-right deletecom' %>
-                  <% end %>
-                  <div>
-                    <p><%= comment.content %><br>
-                      <small><%= time_ago_in_words(comment.created_at) %></small>
-                    </p>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
+        <div class="container" >
+
+          <div id="comments">
+            <%= render 'comments'%>
           </div>
 
           <% if user_signed_in? %>
-            <div>
+            <div >
 
               <div class="col card card-body bg-light">
                 <div class="form-group">
-                  <%= form_with(model: [@project, Comment.new], local: true, id: "myForm", html: { class: 'form-horizontal' }) do |f| %>
+                  <%= form_with(model: [@project, Comment.new], html: { class: 'form-horizontal' , remote: true}) do |f| %>
                   <div class="col-md-12">
                     <legend>Comment:</legend>
                     <%= f.text_area :content, placeholder: 'Write your comment here...', class: 'form-control' %>
-                    <%= f.submit 'Send', class: 'btn btn-primary'%>
+                    <%= f.submit 'Send', class: 'btn btn-primary ax'%>
                   </div>
                 </div>
               <% end %>
             </div>
           </div>
         <% end %>
-
-<script>
-  $("[name=commit]").click(function (e) {
-    e.preventDefault();
-    var new_content = $("[name='comment[content]']").val();
-    $.ajax({
-      url: form.action,
-      type: 'POST',
-      dataType: 'json',
-      data: {comment: {content: new_content}}
-    }).done(function (data) {
-      console.log(data.content);
-    }).fail(function () {
-      console.log("error");
-    }).always(function () {
-      console.log("complete");
-    });
-  });
-</script>
       </div>
     </div>
 
@@ -100,5 +70,7 @@
       <%= link_to 'Details', project_path(@project), class: 'btn btn-info' %>
     <% end %>
 
+
   </div>
+</div>
 </div>

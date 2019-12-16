@@ -3,6 +3,5 @@
     <% if can? :update, @project %>
         <%= link_to 'X', remove_tag_project_path(@project, category), method: :delete, data: { remote: true }, class: "text-white delete" %>
     <% end %>
-
   </small>
 <% end %>

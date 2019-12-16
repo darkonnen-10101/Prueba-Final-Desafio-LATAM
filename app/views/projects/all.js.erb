@@ -1,6 +1,14 @@
 $('<%= j render "showall", title: "Proyecto" %>').modal();
+  $(document).ready(function(){
 
-// .on('hidden.bs.modal', function (e) {
-//   $(this).remove();
-//   $('.modal-backdrop').remove();
-// }).modal();
+
+
+    $(window).on("hide.bs.modal", function() {
+      $('body').css("padding-right", "0");
+
+      $('.modal-backdrop, #myModal').remove();
+      $('body').removeClass('modal-open');
+    });
+
+
+  });

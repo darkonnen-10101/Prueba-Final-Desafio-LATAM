@@ -45,27 +45,17 @@
 
 	</div>
 
-	<% if @comments != nil %>
-		<% @comments.each do |comment| %>
-			<div class="card card-body bg-light mt-5">
-				<span>
-					<strong><%= comment.user.name %>:</strong>
-					<% if can? :destroy, comment %>
-						<%= link_to 'Delete', project_comment_path(@project, comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?' }, class: 'btn btn-sm btn-danger float-right' %>
-					<% end %>
-				</span>
+	<div id="comments" >
 
-				<br>
-				<p><%= comment.content %></p>
-				<small><%= time_ago_in_words(comment.created_at) %></small>
+		<%= render 'comments' %>
 
-			</div>
-		<% end %>
-	<% end %>
+	</div>
+
+
 
 	<% if user_signed_in? %>
 		<div class="card card-body bg-light mt-5">
-			<%= form_with(model: [@project, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
+			<%= form_with(model: [@project, Comment.new], html: { class: 'form-horizontal' , remote: true}) do |f| %>
 			<div class="form-group">
 				<div class="col-md-12">
 					<legend>Comment:</legend>

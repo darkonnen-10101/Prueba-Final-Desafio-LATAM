@@ -25,9 +25,11 @@ class Ability
         # can :read, Category, :all, public: true
         # can :edit, Project, :all
         can :profile, User
+        can :all, User
 
 
-        can :all, Project, :all
+
+        # can :all, Project, :all
         can :index, Project, :all
         can :new, Project, user_id: user.id
         can :create, Project, user_id: user.id

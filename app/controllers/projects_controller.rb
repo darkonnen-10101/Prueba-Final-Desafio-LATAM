@@ -39,12 +39,10 @@ class ProjectsController < ApplicationController
     @project.categories.delete(category)
     # redirect_to root_path
     respond_to do |format|
-      format.js 
+      format.js
     end
 
   end
-
-
 
   def display
     @user = current_user
@@ -62,6 +60,7 @@ class ProjectsController < ApplicationController
   def all
     # @projects = Project.all
     @comments = @project.comments.page(params[:page]).order(created_at: :desc).per(5)
+
   end
 
 
@@ -87,9 +86,9 @@ class ProjectsController < ApplicationController
 
     # cat = Category.find_by(id: params[:category_id])
 
-    # cat = params[:category_id]
+    @cat = params[:category_id]
 
-    params[:category_id].each do |cat|
+    @cat.each do |cat|
       if @project.categories.include? Category.find_by(id: cat)
         next
       else

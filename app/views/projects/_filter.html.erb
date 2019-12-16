@@ -5,7 +5,7 @@
     <% @projects.each do |project| %>
       <div class="col-6 col-sm-4 col-xl-4 col-md-4 col-lg-4">
         <div class="card shadow border-1">
-          <%= link_to (image_tag project.project_photo.url, size: "400x300", class: "card-img-top"), all_project_path(project), :remote => true%>
+          <%= link_to (image_tag project.project_photo.url, size: "400x300", 'data-toggle' => 'modal', 'data-target' => '#myModal', class: "card-img-top button1"), all_project_path(project), :remote => true%>
         </div>
         <div class="w-100" style="margin-top:20px;"></div>
 
