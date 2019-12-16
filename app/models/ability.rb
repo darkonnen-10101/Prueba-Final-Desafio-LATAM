@@ -29,7 +29,7 @@ class Ability
 
 
 
-        # can :all, Project, :all
+        can :all, Project, :all
         can :index, Project, :all
         can :new, Project, user_id: user.id
         can :create, Project, user_id: user.id
