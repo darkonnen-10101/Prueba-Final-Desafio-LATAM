@@ -15,3 +15,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # Rails.application.config.assets.precompile += %w( fontawesome-webfont.ttf )
 # Rails.application.config.assets.precompile += %w( fontawesome-webfont.svg )
+Rails.application.config.assets.precompile += %w( *.jpg *.jpeg *.png)
