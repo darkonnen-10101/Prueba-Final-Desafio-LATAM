@@ -1,11 +1,11 @@
 if Rails.env.development?
   CarrierWave.configure do |config|
-    config.storage :file
+    config.storage = :file
     config.asset_host = 'http://localhost:3000'
   end
 else
   CarrierWave.configure do |config|
-    config.storage :fog
+    config.storage = :fog
     config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       provider:              'AWS',                        # required
