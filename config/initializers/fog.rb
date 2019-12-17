@@ -8,13 +8,8 @@ else
     config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       provider:              'AWS',                        # required
-<<<<<<< HEAD
-      aws_access_key_id:     ENV['AWS_KEY_CARRIERWAVE'],                        # required unless using use_iam_profile Rails.application.credentials.aws[:access_key_id]
-      aws_secret_access_key: ENV['AWS_SECRET_CARRIERWAVE'], # required unless using use_iam_profile Rails.application.credentials.aws[:secret_access_key]
-=======
-      aws_access_key_id:     "XXX",                        # required unless using use_iam_profile Rails.application.credentials.aws[:access_key_id]
-      aws_secret_access_key: "XXX", # required unless using use_iam_profile Rails.application.credentials.aws[:secret_access_key]
->>>>>>> 5cf9fcd2780f0c671ff7e058bb1d39fcf9858a71
+      aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],                        # required unless using use_iam_profile Rails.application.credentials.aws[:access_key_id]
+      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'], # required unless using use_iam_profile Rails.application.credentials.aws[:secret_access_key]
       # use_iam_profile:       true,                         # optional, defaults to false
       # region:                'eu-west-1',                  # optional, defaults to 'us-east-1'
       # host:                  's3.example.com',             # optional, defaults to nil
