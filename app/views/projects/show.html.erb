@@ -31,15 +31,7 @@
 			<p><%= link_to "Demo", URI::HTTP.build({:host => @project.url}).to_s, target: "_blank" %></p>
 			<p><%= link_to "Repository", URI::HTTP.build({:host => @project.repository}).to_s, target: "_blank" %></p>
 
-			<% @project.categories.each do |category| %>
-				<small class="badge badge-info"><%= category.name %>
-					<% if can? :update, @project %>
-						<a href="<%= remove_tag_project_path(@project, category) %>" data-method="delete">
-							<span class="badge text-white">X</span>
-						</a>
-					<% end %>
-				</small>
-			<% end %>
+			<%= render 'tags' %>
 
 		</div>
 
