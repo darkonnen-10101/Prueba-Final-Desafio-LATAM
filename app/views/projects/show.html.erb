@@ -15,8 +15,13 @@
 		<div class="my-3">
 
 			<% if can? :update, @project %>
-				<%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-info' %>
+				<%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-sm btn-info' %>
 			<% end %>
+
+			<% if can? :destroy, @project %>
+				<%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+			<% end %>
+
 
 		</div>
 

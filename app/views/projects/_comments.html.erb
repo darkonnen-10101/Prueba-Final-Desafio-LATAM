@@ -1,7 +1,7 @@
 
 <% if @comments != nil %>
   <% @comments.each do |comment| %>
-    <div class="card card-body bg-light my-2 ">
+    <div class="card card-body bg-light my-2 mx-5 px-5">
       <span>
         <strong><%= comment.user.name %>:</strong>
         <% if can? :destroy, comment %>

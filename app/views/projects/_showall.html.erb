@@ -1,22 +1,29 @@
-
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header ">
-        <div style="flex-direction:column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; flex-direction:column;" class="w-100">
           <h2 class="modal-title"><%= @project.name %></h2>
           <h6><%= @project.user.course %></h6>
 
           <h5>By
             <%= link_to "#{@project.user.name}", profile_path(@project.user.name) %>
           </h5>
+
+          <div class="row">
+
           <% if can? :update, @project %>
-            <%= link_to 'Editar', edit_project_path(@project), class: 'btn btn-info btn-sm' %>
+            <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-info btn-sm' %>
           <% end %>
 
+          <div class="mx-2">
+
+          </div>
+
           <% if can? :destroy, @project %>
-            <%= link_to 'Eliminar', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+            <%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
           <% end %>
+        </div>
 
         </div>
 
@@ -27,8 +34,11 @@
       </div>
 
       <div class="modal-body">
-        <%= image_tag @project.project_photo.url, :width => '100%' %>
-        <div class="container my-3 ">
+        <div class="d-flex justify-content-center">
+          <%= image_tag @project.project_photo.url, :width => '90%' %>
+        </div>
+        <hr>
+        <div class="container my-3 mx-5 px-5">
           <p><%= link_to "Demo", URI::HTTP.build({:host => @project.url}).to_s, target: "_blank" %></p>
           <p><%= link_to "Repository", URI::HTTP.build({:host => @project.repository}).to_s, target: "_blank" %></p>
           <p><%= @project.lead %></p>
@@ -56,7 +66,9 @@
                   <div class="col-md-12">
                     <legend>Comment:</legend>
                     <%= f.text_area :content, placeholder: 'Write your comment here...', class: 'form-control' %>
-                    <%= f.submit 'Send', class: 'btn btn-primary ax'%>
+                    <div class="text-center mt-2">
+                      <%= f.submit 'Post comment', class: 'btn btn-primary ax'%>
+                    </div>
                   </div>
                 </div>
               <% end %>
