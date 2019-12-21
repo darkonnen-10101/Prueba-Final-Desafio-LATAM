@@ -23,6 +23,19 @@ Category.destroy_all
   "https://wearefram.com/wp-content/uploads/2019/11/The-quick-grasp-of-mobile-app-development-in-2019-and-trend-in-2020.png"
 ]
 
+@users = [
+  "https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg",
+  "https://kottke.org/plus/misc/images/ai-faces-01.jpg",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm_GPnUjJp7i2PQBetTpGclRCyDhaycc-b8z29WMxUU8SkA6sA&s",
+  "https://www.i-guridi.com/wp-content/uploads/2019/09/srlk-faces-2.jpg",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSweGwteXLgVKI8hUDaBk98B83fS88KMmYLYFzRYpdtNANm3eAz&s",
+  "https://cdn-01.independent.ie/entertainment/movies/article38730750.ece/942a9/AUTOCROP/w620/ipanews_c1dbe7a3-ea8c-49b6-a49d-87f0b4297063_1",
+  "https://pbs.twimg.com/profile_images/1060954783396384768/TFJgGy_1_400x400.jpg",
+  "https://booker-theface.s3.amazonaws.com/library/1156/20191119_154528477.jpg",
+  "https://storage.googleapis.com/faces_v1/faces/i3jgmzcl2xzku.jpg",
+  "https://media.cnnchile.com/sites/2/2019/08/cnn-pew-die.jpg",
+]
+
 @courses = ["Desarrollo Full Stack", "Desarrollo Front End", "Data Science", "Diseño UX/UI", "Desarrollo Sitios Web", "Marketing Digital", "Desarrollo Videojuegos", "Desarrollo Android", "Desarrollo Videojuegos", "Desarrollo Android"]
 @tags = ["Python", "Django", "Java", "Javascript", "Ruby", "Rails", "PHP", "Laravel", "Symfony", "Wordpress"]
 @cities = ["Córdoba", "Santiago", "Valparaíso"]
@@ -36,7 +49,7 @@ admin.add_role :admin
 
 10.times do |i|
 
-  u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", avatar: File.open("app/assets/images/profile.png"), city: @cities.sample, course: @courses[i])
+  u = User.create(name: "User#{i}", email:"email#{i}@email.com", password: "123123", remote_avatar_url: @users[i], city: @cities.sample, course: @courses[i])
   p = Project.create(user: u, name: "Project#{i}", remote_project_photo_url: @images[i] , url: "www.google.com", repository: "www.google.com", lead: "lorem ipsum", description: "lorem ipsum")
   p.categories << Category.new(name: @tags[i])
   11.times do |j|
