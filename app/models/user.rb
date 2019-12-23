@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, ImageUploader
 
-
   rolify
 
   after_initialize :set_default_role, if: :new_record?
