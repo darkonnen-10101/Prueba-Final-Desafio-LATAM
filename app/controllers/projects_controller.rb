@@ -73,8 +73,15 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user = current_user
 
+    @cat = params[:category_id]
+
+
     if @project.save
-      @project.categories << Category.find_by(id: params[:category_id])
+
+      @cat.each do |cat|
+          @project.categories << Category.find_by(id: cat)
+      end
+
 
       render :show, status: :created, location: @project
     else
