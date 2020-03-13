@@ -6,6 +6,8 @@ Ejecutar rails db:seed para generar semillas de 10 usuarios cada uno con 1 proye
 
 Admin log in:
 
-email => admin@admin
- |
-password => 123123
+> email => admin@admin
+
+> |
+
+> password => 123123
