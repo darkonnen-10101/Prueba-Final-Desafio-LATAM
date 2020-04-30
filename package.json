@@ -8,7 +8,7 @@
     "@rails/webpacker": "^4.2.0",
     "chart.js": "^2.9.3",
     "chartkick": "^3.2.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "suggestags": "^1.9.0",
     "turbolinks": "^5.2.0"
   },
